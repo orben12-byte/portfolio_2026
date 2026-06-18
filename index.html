@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Or Ben-Senior — Product Designer</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --yellow: #FFD60A;
+            --black:  #111111;
+            --card:   #1A1A1A;
+            --orange: #F5820A;
+            --white:  #FFFFFF;
+            --muted:  #777777;
+            --max:    1100px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 48px;
+            background: rgba(255, 214, 10, 0.92);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-name {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--black);
+            text-decoration: none;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--black);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover { opacity: 1; }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            background: var(--yellow);
+            display: flex;
+            align-items: center;
+            padding: 100px 48px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 48px;
+        }
+
+        .hero-text { flex: 1; }
+
+        .hero-tag {
+            display: inline-block;
+            background: var(--black);
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+        }
+
+        .hero-name {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 800;
+            font-size: clamp(52px, 7vw, 80px);
+            color: var(--black);
+            line-height: 1;
+            letter-spacing: -2px;
+            margin-bottom: 16px;
+        }
+
+        .hero-tagline {
+            font-size: 18px;
+            font-weight: 400;
+            color: rgba(17, 17, 17, 0.65);
+            line-height: 1.55;
+            max-width: 460px;
+            margin-bottom: 36px;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--black);
+            color: var(--yellow);
+            font-weight: 600;
+            font-size: 15px;
+            padding: 14px 28px;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+        }
+
+        .hero-avatar {
+            flex-shrink: 0;
+            width: clamp(260px, 32vw, 380px);
+            height: clamp(260px, 32vw, 380px);
+        }
+
+        .hero-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* ── WORK ── */
+        .work {
+            background: var(--black);
+            padding: 96px 48px;
+        }
+
+        .section-header {
+            max-width: var(--max);
+            margin: 0 auto 48px;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+        }
+
+        .section-title {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 800;
+            font-size: clamp(32px, 4vw, 44px);
+            letter-spacing: -1.5px;
+        }
+
+        .section-count {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        .projects-grid {
+            max-width: var(--max);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 20px;
+        }
+
+        /* Beit Shulamit spans full width */
+        .card-featured { grid-column: 1 / -1; }
+
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+        }
+
+        .card-thumb {
+            width: 100%;
+            aspect-ratio: 16/7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.18);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:not(.card-featured) .card-thumb { aspect-ratio: 4/3; }
+
+        .card-thumb-beit {
+            background: linear-gradient(135deg, #0f2b4a 0%, #1a4a7a 50%, #0d3360 100%);
+        }
+
+        .card-thumb-blinkage {
+            background: linear-gradient(135deg, #1a0a00 0%, #3d1400 50%, #2a0d00 100%);
+        }
+
+        .card-thumb-digitaz {
+            background: linear-gradient(135deg, #0f0a2e 0%, #2a1a5e 50%, #1a0f3d 100%);
+        }
+
+        /* Subtle grid overlay on thumbnails */
+        .card-thumb::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .card-thumb-label {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-body {
+            padding: 24px 28px 28px;
+        }
+
+        .card-meta {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            letter-spacing: -0.5px;
+            color: var(--white);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .card:not(.card-featured) .card-title { font-size: 19px; }
+
+        .card-desc {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        /* ── CLIENTS ── */
+        .clients {
+            background: var(--yellow);
+            padding: 56px 48px;
+        }
+
+        .clients-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+        }
+
+        .clients-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(17,17,17,0.5);
+            margin-bottom: 28px;
+        }
+
+        .clients-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .client-tag {
+            background: rgba(17,17,17,0.08);
+            border: 1.5px solid rgba(17,17,17,0.12);
+            border-radius: 100px;
+            padding: 8px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        /* ── ABOUT ── */
+        .about {
+            background: var(--black);
+            padding: 96px 48px;
+        }
+
+        .about-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 800;
+            font-size: clamp(32px, 4vw, 44px);
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .about-text a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--yellow);
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            margin-top: 8px;
+        }
+
+        .about-text a:hover { text-decoration: underline; }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .stat-number {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 800;
+            font-size: 40px;
+            letter-spacing: -2px;
+            color: var(--yellow);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        /* ── CONTACT / FOOTER ── */
+        footer {
+            background: var(--card);
+            padding: 56px 48px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .footer-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-left h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .footer-left p {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .footer-link:hover { transform: translateY(-2px); }
+
+        .footer-link-email {
+            background: var(--yellow);
+            color: var(--black);
+        }
+
+        .footer-link-li {
+            background: rgba(255,255,255,0.08);
+            color: var(--white);
+        }
+
+        .footer-copy {
+            max-width: var(--max);
+            margin: 32px auto 0;
+            font-size: 12px;
+            color: rgba(255,255,255,0.2);
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a class="nav-name" href="#top">Or Ben-Senior</a>
+        <ul class="nav-links">
+            <li><a href="#work">Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <span class="hero-tag">Available for work · Haifa, Israel</span>
+                <h1 class="hero-name">Or<br>Ben-Senior</h1>
+                <p class="hero-tagline">Product Designer with a background spanning physical and digital experience design. I make complex systems feel simple.</p>
+                <a class="hero-cta" href="#work">See my work ↓</a>
+            </div>
+            <div class="hero-avatar">
+                <img src="avatar.svg" alt="Or Ben-Senior">
+            </div>
+        </div>
+    </section>
+
+    <!-- WORK -->
+    <section class="work" id="work">
+        <div class="section-header">
+            <h2 class="section-title">Selected Work</h2>
+            <span class="section-count">3 projects</span>
+        </div>
+
+        <div class="projects-grid">
+
+            <!-- Beit Shulamit — featured, full width -->
+            <a class="card card-featured" href="project-beit-shulamit.html">
+                <div class="card-thumb card-thumb-beit">
+                    <span class="card-thumb-label">BEIT SHULAMIT</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-meta">Information Architecture · Wayfinding · Enterprise</p>
+                    <h3 class="card-title">Beit Shulamit Oncology Center</h3>
+                    <p class="card-desc">Complete wayfinding system for an 11,000m² oncology center — 3 floors, 98 beds, 800+ sign types, 3 distinct user groups. Translating complex hospital navigation into a clear physical information architecture.</p>
+                </div>
+            </a>
+
+            <!-- Blinkage -->
+            <a class="card" href="project-blinkage.html">
+                <div class="card-thumb card-thumb-blinkage">
+                    <span class="card-thumb-label">BLINKAGE</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-meta">Product Design · Web & Mobile</p>
+                    <h3 class="card-title">Blinkage</h3>
+                    <p class="card-desc">Digital product design from research and wireframing through to final prototype. Delivered within a fast-paced agency environment at Shnorkel Studio / BDO Digital.</p>
+                </div>
+            </a>
+
+            <!-- DIGI.TAZ -->
+            <a class="card" href="project-digitaz.html">
+                <div class="card-thumb card-thumb-digitaz">
+                    <span class="card-thumb-label">DIGI.TAZ</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-meta">Product Design · Fintech · Concept</p>
+                    <h3 class="card-title">DIGI.TAZ E-Wallet</h3>
+                    <p class="card-desc">Proof-of-concept digital wallet experience — simplifying payments and financial management for everyday users.</p>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- CLIENTS -->
+    <section class="clients">
+        <div class="clients-inner">
+            <p class="clients-label">Enterprise clients</p>
+            <div class="clients-list">
+                <span class="client-tag">Emek Medical Center</span>
+                <span class="client-tag">Israel Railways</span>
+                <span class="client-tag">Israel Airports Authority</span>
+                <span class="client-tag">KKL</span>
+                <span class="client-tag">Rambam Medical Center</span>
+                <span class="client-tag">BDO Digital</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+        <div class="about-inner">
+            <div class="about-text">
+                <h2>Design that connects people to spaces and systems</h2>
+                <p>I'm a Product Designer based in Haifa. I started in physical experience design — wayfinding, signage systems, spatial IA — and brought those principles into digital product work.</p>
+                <p>What I care about most: making complex systems legible. Whether it's a hospital with 800 signs or an app with 50 flows, the problem is the same — how do people know where they are and where to go next?</p>
+                <p>Currently at Raya Galboa Design Studio, previously at Shnorkel Studio (BDO Digital). Also teaching Figma to the next generation of designers.</p>
+                <a href="cv-or-bensenior-v1.html" target="_blank">View full CV →</a>
+            </div>
+            <div class="about-stats">
+                <div class="stat-card">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">UX/UI projects delivered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Years in design</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">11K</div>
+                    <div class="stat-label">m² designed (Beit Shulamit)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">800+</div>
+                    <div class="stat-label">Sign types, one project</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / FOOTER -->
+    <footer id="contact">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <h3>Let's work together</h3>
+                <p>054-2500312 · Haifa, Israel</p>
+            </div>
+            <div class="footer-links">
+                <a class="footer-link footer-link-email" href="mailto:orben12@gmail.com">orben12@gmail.com</a>
+                <a class="footer-link footer-link-li" href="https://www.linkedin.com/in/or-bensenior/" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-copy">© 2026 Or Ben-Senior</div>
+    </footer>
+
+</body>
+</html>
