@@ -1,0 +1,10 @@
+# Large Figma/Behance exports — not needed for portfolio display
+behance.svg
+behance@2x.png
+*.mp4
+*.zip
+Figma/
+Inspiration/
+
+# Keep behance.png only if small — excluded here since 8-10MB
+behance.png
