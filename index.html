@@ -85,6 +85,31 @@
             overflow: hidden;
         }
 
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            pointer-events: none;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        .hero-bg span {
+            display: block;
+            font-family: 'DM Sans', sans-serif;
+            font-size: clamp(160px, 22vw, 280px);
+            font-weight: 800;
+            color: transparent;
+            -webkit-text-stroke: 2px rgba(255, 255, 255, 0.28);
+            letter-spacing: -8px;
+            line-height: 0.88;
+            white-space: nowrap;
+        }
+
         .hero-inner {
             max-width: var(--max);
             margin: 0 auto;
@@ -192,12 +217,10 @@
             max-width: var(--max);
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 20px;
         }
 
-        /* Beit Shulamit spans full width */
         .card-featured { grid-column: 1 / -1; }
 
         .card {
@@ -216,7 +239,7 @@
 
         .card-thumb {
             width: 100%;
-            aspect-ratio: 16/7;
+            aspect-ratio: 4/3;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -230,7 +253,6 @@
             overflow: hidden;
         }
 
-        .card:not(.card-featured) .card-thumb { aspect-ratio: 4/3; }
 
         .card-thumb-beit {
             background: linear-gradient(135deg, #0f2b4a 0%, #1a4a7a 50%, #0d3360 100%);
@@ -295,7 +317,6 @@
             line-height: 1.2;
         }
 
-        .card:not(.card-featured) .card-title { font-size: 19px; }
 
         .card-desc {
             font-size: 14px;
@@ -505,6 +526,10 @@
         .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .projects-grid { grid-template-columns: 1fr 1fr; }
+        }
+
         @media (max-width: 768px) {
             nav { padding: 16px 24px; }
 
@@ -523,9 +548,7 @@
             }
 
             .nav-links.open { display: flex; }
-
             .nav-links li { width: 100%; }
-
             .nav-links a {
                 display: block;
                 padding: 14px 24px;
@@ -533,54 +556,28 @@
                 opacity: 1;
             }
 
-            .hero {
-                padding: 100px 24px 60px;
-                min-height: auto;
-            }
-
-            .hero-inner {
-                flex-direction: column-reverse;
-                align-items: flex-start;
-                gap: 32px;
-            }
-
-            .hero-avatar {
-                width: clamp(160px, 50vw, 220px);
-                height: clamp(160px, 50vw, 220px);
-                align-self: center;
-            }
-
+            .hero { padding: 100px 24px 60px; min-height: auto; }
+            .hero-inner { flex-direction: column-reverse; align-items: flex-start; gap: 32px; }
+            .hero-avatar { width: clamp(160px, 50vw, 220px); height: clamp(160px, 50vw, 220px); align-self: center; }
             .hero-name { font-size: clamp(44px, 12vw, 64px); }
             .hero-tagline { font-size: 16px; }
 
             .work { padding: 64px 24px; }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .card-featured { grid-column: 1; }
-
-            .card:not(.card-featured) .card-thumb { aspect-ratio: 16/7; }
+            .projects-grid { grid-template-columns: 1fr; }
 
             .clients { padding: 40px 24px; }
 
             .about { padding: 64px 24px; }
-
-            .about-inner {
-                grid-template-columns: 1fr;
-                gap: 48px;
-            }
+            .about-inner { grid-template-columns: 1fr; gap: 48px; }
 
             footer { padding: 40px 24px; }
-
             .footer-inner { flex-direction: column; align-items: flex-start; }
-
             .footer-links { flex-wrap: wrap; }
         }
 
         @media (max-width: 480px) {
             .hero-name { font-size: 44px; }
+            .hero-bg span { font-size: 120px; }
             .stat-number { font-size: 32px; }
             .footer-link { padding: 10px 16px; font-size: 13px; }
         }
@@ -603,6 +600,10 @@
 
     <!-- HERO -->
     <section class="hero" id="top">
+        <div class="hero-bg" aria-hidden="true">
+            <span>HELLO</span>
+            <span>HELLO</span>
+        </div>
         <div class="hero-inner">
             <div class="hero-text">
                 <span class="hero-tag">Available for work · Haifa, Israel</span>
@@ -619,14 +620,14 @@
     <!-- WORK -->
     <section class="work" id="work">
         <div class="section-header">
-            <h2 class="section-title">Selected Work</h2>
+            <h2 class="section-title">Work</h2>
             <span class="section-count">6 projects</span>
         </div>
 
         <div class="projects-grid">
 
-            <!-- Beit Shulamit — featured, full width -->
-            <a class="card card-featured" href="project-beit-shulamit.html">
+            <!-- Beit Shulamit -->
+            <a class="card" href="project-beit-shulamit.html">
                 <div class="card-thumb card-thumb-beit">
                     <span class="card-thumb-label">BEIT SHULAMIT</span>
                 </div>
@@ -685,8 +686,8 @@
                 </div>
             </a>
 
-            <!-- Life Hero — featured -->
-            <a class="card card-featured" href="project-lifehero.html">
+            <!-- Life Hero -->
+            <a class="card" href="project-lifehero.html">
                 <div class="card-thumb card-thumb-lifehero">
                     <span class="card-thumb-label">LIFE HERO</span>
                 </div>
@@ -705,12 +706,13 @@
         <div class="clients-inner">
             <p class="clients-label">Enterprise clients</p>
             <div class="clients-list">
-                <span class="client-tag">Emek Medical Center</span>
-                <span class="client-tag">Israel Railways</span>
-                <span class="client-tag">Israel Airports Authority</span>
-                <span class="client-tag">KKL</span>
+                <span class="client-tag">MAX</span>
+                <span class="client-tag">Hitech Zone</span>
+                <span class="client-tag">Lubinski Group</span>
                 <span class="client-tag">Rambam Medical Center</span>
-                <span class="client-tag">BDO Digital</span>
+                <span class="client-tag">Emek Medical Center</span>
+                <span class="client-tag">BuyMe</span>
+                <span class="client-tag">And more</span>
             </div>
         </div>
     </section>
@@ -744,7 +746,7 @@
                 </div>
                 <div class="stat-card stat-card-wide">
                     <div class="stat-number">300+</div>
-                    <div class="stat-label">Research participants, Life Hero</div>
+                    <div class="stat-label">Screens, one project (Life Hero)</div>
                 </div>
             </div>
         </div>
