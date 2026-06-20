@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sirkis 21 — Or Ben-Senior</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --yellow: #FFD60A;
+            --black:  #111111;
+            --card:   #1A1A1A;
+            --white:  #FFFFFF;
+            --muted:  #777777;
+            --max:    1100px;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 48px;
+            background: rgba(255, 214, 10, 0.92);
+            backdrop-filter: blur(8px);
+        }
+        .nav-name {
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--black);
+            text-decoration: none;
+        }
+        .nav-back {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--black);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .nav-back:hover { opacity: 1; }
+        .hero {
+            min-height: 60vh;
+            background: #005950;
+            display: flex;
+            align-items: flex-end;
+            padding: 120px 48px 56px;
+        }
+        .hero-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+            width: 100%;
+        }
+        .hero-category {
+            font-size: 13px;
+            font-weight: 600;
+            color: #ffffff;
+            opacity: 0.6;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .hero-title {
+            font-size: clamp(36px, 6vw, 72px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1;
+            color: #ffffff;
+            margin-bottom: 24px;
+        }
+        .hero-desc {
+            font-size: 18px;
+            color: #ffffff;
+            opacity: 0.7;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        .coming-soon {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 80px 48px 120px;
+            text-align: center;
+        }
+        .badge {
+            display: inline-block;
+            background: var(--card);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--yellow);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 8px 20px;
+            border-radius: 100px;
+            margin-bottom: 32px;
+        }
+        .coming-soon h2 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+        }
+        .coming-soon p {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 480px;
+            margin: 0 auto 40px;
+        }
+        .btn {
+            display: inline-block;
+            background: var(--yellow);
+            color: var(--black);
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.85; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="nav-name" href="index.html">Or Ben-Senior</a>
+        <a class="nav-back" href="index.html">← Back to work</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <p class="hero-category">Product Design · Consumer App · Food</p>
+            <h1 class="hero-title">Sirkis 21</h1>
+            <p class="hero-desc">App experience for a local food market — connecting small independent vendors with their customers through a personal, story-driven digital product.</p>
+        </div>
+    </section>
+
+    <section class="coming-soon">
+        <div class="badge">Case Study Coming Soon</div>
+        <h2>Full write-up in progress</h2>
+        <p>The detailed case study for this project is being written. Check back soon — or reach out directly if you'd like to hear about it.</p>
+        <a class="btn" href="index.html">← See all work</a>
+    </section>
+</body>
+</html>
