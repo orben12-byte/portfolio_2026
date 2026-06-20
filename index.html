@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Or Ben-Senior — Product Designer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23FFD60A'/><text x='16' y='23' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='20' fill='%23111'>O</text></svg>">
+    <meta property="og:title" content="Or Ben-Senior — Product Designer">
+    <meta property="og:description" content="Product Designer with a background spanning physical and digital experience design. I make complex systems feel simple.">
+    <meta property="og:url" content="https://orben12-byte.github.io/portfolio_2026/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Or Ben-Senior — Product Designer">
+    <meta name="twitter:description" content="Product Designer — wayfinding, enterprise SaaS, and consumer apps. Based in Haifa, Israel.">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,7 +22,7 @@
             --card:   #1A1A1A;
             --orange: #F5820A;
             --white:  #FFFFFF;
-            --muted:  #777777;
+            --muted:  #999999;
             --max:    1100px;
         }
 
@@ -127,17 +135,17 @@
             gap: 10px;
             background: var(--black);
             color: var(--yellow);
-            font-weight: 600;
-            font-size: 15px;
-            padding: 14px 28px;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 18px 36px;
             border-radius: 100px;
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .hero-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.35);
         }
 
         .hero-avatar {
@@ -175,8 +183,9 @@
 
         .section-count {
             font-size: 13px;
-            font-weight: 500;
-            color: var(--muted);
+            font-weight: 700;
+            color: var(--yellow);
+            letter-spacing: 0.5px;
         }
 
         .projects-grid {
@@ -470,6 +479,111 @@
             padding-top: 24px;
             border-top: 1px solid rgba(255,255,255,0.06);
         }
+
+        /* ── HAMBURGER ── */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--black);
+            border-radius: 2px;
+            transition: transform 0.25s, opacity 0.25s;
+        }
+
+        .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+        .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+
+            .nav-hamburger { display: flex; }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0; right: 0;
+                background: var(--yellow);
+                flex-direction: column;
+                gap: 0;
+                padding: 8px 0 16px;
+                border-top: 1px solid rgba(0,0,0,0.08);
+            }
+
+            .nav-links.open { display: flex; }
+
+            .nav-links li { width: 100%; }
+
+            .nav-links a {
+                display: block;
+                padding: 14px 24px;
+                font-size: 16px;
+                opacity: 1;
+            }
+
+            .hero {
+                padding: 100px 24px 60px;
+                min-height: auto;
+            }
+
+            .hero-inner {
+                flex-direction: column-reverse;
+                align-items: flex-start;
+                gap: 32px;
+            }
+
+            .hero-avatar {
+                width: clamp(160px, 50vw, 220px);
+                height: clamp(160px, 50vw, 220px);
+                align-self: center;
+            }
+
+            .hero-name { font-size: clamp(44px, 12vw, 64px); }
+            .hero-tagline { font-size: 16px; }
+
+            .work { padding: 64px 24px; }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-featured { grid-column: 1; }
+
+            .card:not(.card-featured) .card-thumb { aspect-ratio: 16/7; }
+
+            .clients { padding: 40px 24px; }
+
+            .about { padding: 64px 24px; }
+
+            .about-inner {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            footer { padding: 40px 24px; }
+
+            .footer-inner { flex-direction: column; align-items: flex-start; }
+
+            .footer-links { flex-wrap: wrap; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-name { font-size: 44px; }
+            .stat-number { font-size: 32px; }
+            .footer-link { padding: 10px 16px; font-size: 13px; }
+        }
     </style>
 </head>
 <body>
@@ -477,11 +591,14 @@
     <!-- NAV -->
     <nav>
         <a class="nav-name" href="#top">Or Ben-Senior</a>
-        <ul class="nav-links">
+        <ul class="nav-links" id="nav-links">
             <li><a href="#work">Work</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
 
     <!-- HERO -->
@@ -638,7 +755,7 @@
         <div class="footer-inner">
             <div class="footer-left">
                 <h3>Let's work together</h3>
-                <p>054-2500312 · Haifa, Israel</p>
+                <p><a href="tel:0542500312" style="color:inherit;text-decoration:none;">054-2500312</a> · Haifa, Israel</p>
             </div>
             <div class="footer-links">
                 <a class="footer-link footer-link-email" href="mailto:orben12@gmail.com">orben12@gmail.com</a>
@@ -649,5 +766,19 @@
         <div class="footer-copy">© 2026 Or Ben-Senior</div>
     </footer>
 
+    <script>
+        const btn = document.getElementById('nav-hamburger');
+        const links = document.getElementById('nav-links');
+        btn.addEventListener('click', () => {
+            btn.classList.toggle('open');
+            links.classList.toggle('open');
+        });
+        links.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                btn.classList.remove('open');
+                links.classList.remove('open');
+            });
+        });
+    </script>
 </body>
 </html>
