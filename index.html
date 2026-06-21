@@ -565,15 +565,15 @@
             .footer-links { flex-wrap: wrap; }
         }
 
-        /* ── HERO ENTRANCE ── */
-        @keyframes heroFadeUp {
-            from { opacity: 0; transform: translateY(22px); }
-            to   { opacity: 1; transform: translateY(0); }
+        /* ── HERO ENTRANCE (clip-path reveal) ── */
+        @keyframes heroClipReveal {
+            from { clip-path: inset(100% 0 0 0); transform: translateY(20px); }
+            to   { clip-path: inset(0% 0 0 0);   transform: translateY(0); }
         }
-        .hero-tag     { animation: heroFadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.10s both; }
-        .hero-name    { animation: heroFadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
-        .hero-tagline { animation: heroFadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.40s both; }
-        .hero-avatar  { animation: heroFadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.55s both; }
+        .hero-tag     { animation: heroClipReveal 0.7s cubic-bezier(0.16,1,0.3,1) 0.10s both; }
+        .hero-name    { animation: heroClipReveal 0.8s cubic-bezier(0.16,1,0.3,1) 0.26s both; }
+        .hero-tagline { animation: heroClipReveal 0.7s cubic-bezier(0.16,1,0.3,1) 0.44s both; }
+        .hero-avatar  { animation: heroClipReveal 0.9s cubic-bezier(0.16,1,0.3,1) 0.55s both; }
 
         /* ── CUSTOM CURSOR (desktop only) ── */
         @media (hover: hover) and (pointer: fine) {
@@ -590,8 +590,9 @@
                 transition: width 0.25s ease, height 0.25s ease, opacity 0.3s ease;
                 will-change: transform;
             }
-            #cursor.is-visible { opacity: 1; }
+            #cursor.is-visible  { opacity: 1; }
             #cursor.is-hovering { width: 48px; height: 48px; }
+            #cursor.on-yellow   { background: var(--black); }
         }
 
         /* ── REDUCED MOTION ── */
@@ -842,6 +843,10 @@
             document.querySelectorAll('.card').forEach(card => {
                 card.addEventListener('mouseenter', () => cursor.classList.add('is-hovering'));
                 card.addEventListener('mouseleave', () => cursor.classList.remove('is-hovering'));
+            });
+            document.querySelectorAll('.hero, nav, .clients').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('on-yellow'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('on-yellow'));
             });
             (function loop() {
                 cx += (mx - cx) * 0.14;
