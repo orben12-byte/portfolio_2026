@@ -204,10 +204,23 @@
             overflow: hidden;
             text-decoration: none;
             display: block;
-            transition: transform 0.25s, box-shadow 0.25s;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            opacity: 0;
+            transform: translateY(28px);
         }
 
-        .card:hover {
+        .card.animating {
+            transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1),
+                        transform 0.6s cubic-bezier(0.16,1,0.3,1),
+                        box-shadow 0.2s ease;
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card.visible:hover {
             transform: translateY(-4px);
             box-shadow: 0 16px 48px rgba(0,0,0,0.4);
         }
@@ -254,6 +267,25 @@
         }
 
         .card-thumb-label { display: none; }
+
+        .card-thumb::after {
+            content: 'View Case Study';
+            position: absolute;
+            inset: 0;
+            background: rgba(17,17,17,0.65);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--yellow);
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .card.visible:hover .card-thumb::after { opacity: 1; }
 
         .card-body {
             padding: 24px 28px 28px;
@@ -532,6 +564,47 @@
             .footer-links { flex-wrap: wrap; }
         }
 
+        /* ── HERO ENTRANCE ── */
+        @keyframes heroFadeUp {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-tag     { animation: heroFadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.10s both; }
+        .hero-name    { animation: heroFadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
+        .hero-tagline { animation: heroFadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.40s both; }
+        .hero-avatar  { animation: heroFadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.55s both; }
+
+        /* ── CUSTOM CURSOR (desktop only) ── */
+        @media (hover: hover) and (pointer: fine) {
+            body { cursor: none; }
+            #cursor {
+                position: fixed; top: 0; left: 0;
+                width: 10px; height: 10px;
+                background: var(--yellow);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transform: translate(-50%, -50%);
+                opacity: 0;
+                transition: width 0.25s ease, height 0.25s ease, opacity 0.3s ease;
+                will-change: transform;
+            }
+            #cursor.is-visible { opacity: 1; }
+            #cursor.is-hovering { width: 48px; height: 48px; }
+        }
+
+        /* ── REDUCED MOTION ── */
+        @media (prefers-reduced-motion: reduce) {
+            .hero-tag, .hero-name, .hero-tagline, .hero-avatar {
+                animation: none; opacity: 1; transform: none;
+            }
+            .card { opacity: 1; transform: none; }
+            .card.animating, .card.visible {
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            #cursor { display: none !important; }
+        }
+
         @media (max-width: 480px) {
             .hero-name { font-size: 44px; }
             .stat-number { font-size: 32px; }
@@ -540,6 +613,7 @@
     </style>
 </head>
 <body>
+    <div id="cursor" aria-hidden="true"></div>
 
     <!-- NAV -->
     <nav>
@@ -687,6 +761,7 @@
     </footer>
 
     <script>
+        // ── NAV HAMBURGER ──
         const btn = document.getElementById('nav-hamburger');
         const links = document.getElementById('nav-links');
         btn.addEventListener('click', () => {
@@ -699,6 +774,82 @@
                 links.classList.remove('open');
             });
         });
+
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // ── STATS COUNTER ──
+        if (!reducedMotion) {
+            function animateCounter(el) {
+                const text = el.textContent.trim();
+                const suffix = text.replace(/[0-9]/g, '');
+                const target = parseInt(text);
+                if (isNaN(target)) return;
+                const duration = 1200;
+                const startTime = performance.now();
+                function tick(now) {
+                    const progress = Math.min((now - startTime) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.round(eased * target) + suffix;
+                    if (progress < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            }
+            const statsObs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter(entry.target);
+                        statsObs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            document.querySelectorAll('.stat-number').forEach(el => statsObs.observe(el));
+        }
+
+        // ── CARD SCROLL ENTRANCE ──
+        if (!reducedMotion) {
+            const cards = Array.from(document.querySelectorAll('.card'));
+            const cardObs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const card = entry.target;
+                        const idx = cards.indexOf(card);
+                        card.classList.add('animating');
+                        setTimeout(() => {
+                            requestAnimationFrame(() => card.classList.add('visible'));
+                        }, idx * 80);
+                        card.addEventListener('transitionend', (e) => {
+                            if (e.propertyName === 'opacity') card.classList.remove('animating');
+                        }, { once: true });
+                        cardObs.unobserve(card);
+                    }
+                });
+            }, { threshold: 0.08 });
+            cards.forEach(card => cardObs.observe(card));
+        } else {
+            document.querySelectorAll('.card').forEach(c => c.classList.add('visible'));
+        }
+
+        // ── CUSTOM CURSOR ──
+        if (!reducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            const cursor = document.getElementById('cursor');
+            let mx = 0, my = 0, cx = 0, cy = 0;
+            document.addEventListener('mousemove', e => {
+                mx = e.clientX; my = e.clientY;
+                cursor.classList.add('is-visible');
+            });
+            document.addEventListener('mouseleave', () => cursor.classList.remove('is-visible'));
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mouseenter', () => cursor.classList.add('is-hovering'));
+                card.addEventListener('mouseleave', () => cursor.classList.remove('is-hovering'));
+            });
+            (function loop() {
+                cx += (mx - cx) * 0.14;
+                cy += (my - cy) * 0.14;
+                cursor.style.left = cx + 'px';
+                cursor.style.top  = cy + 'px';
+                requestAnimationFrame(loop);
+            })();
+        }
     </script>
 </body>
 </html>
