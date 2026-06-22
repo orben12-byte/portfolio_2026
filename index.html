@@ -587,6 +587,7 @@
                 position: fixed; top: 0; left: 0;
                 width: 10px; height: 10px;
                 background: var(--yellow);
+                mix-blend-mode: difference;
                 border-radius: 50%;
                 pointer-events: none;
                 z-index: 9999;
@@ -597,7 +598,6 @@
             }
             #cursor.is-visible  { opacity: 1; }
             #cursor.is-hovering { width: 48px; height: 48px; }
-            #cursor.on-yellow   { background: var(--black); }
         }
 
         /* ── REDUCED MOTION ── */
@@ -861,11 +861,7 @@
                 el.addEventListener('mouseenter', () => cursor.classList.add('is-hovering'));
                 el.addEventListener('mouseleave', () => cursor.classList.remove('is-hovering'));
             });
-            document.querySelectorAll('.hero, nav, .clients').forEach(el => {
-                el.addEventListener('mouseenter', () => cursor.classList.add('on-yellow'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('on-yellow'));
-            });
-            (function loop() {
+(function loop() {
                 cx += (mx - cx) * 0.14;
                 cy += (my - cy) * 0.14;
                 cursor.style.left = cx + 'px';
