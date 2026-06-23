@@ -22,15 +22,6 @@
         .nav-project { font-size: 14px; font-weight: 700; color: #fff; }
         .nav-name { font-size: 13px; color: rgba(255,255,255,0.4); }
 
-        .cs-hero {
-            background: var(--yellow);
-            padding: 72px 40px 64px;
-            min-height: 260px; display: flex; align-items: flex-end;
-        }
-        .cs-hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
-        .cs-tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(17,17,17,0.55); margin-bottom: 16px; }
-        .cs-hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 800; letter-spacing: -1.5px; line-height: 1; color: #111; }
-
         .cs-case { max-width: 1100px; margin: 0 auto; }
         .cs-case img { display: block; width: 100%; }
 
@@ -41,7 +32,6 @@
         }
         .cs-proto-inner { max-width: 1100px; margin: 0 auto; }
 
-        /* 3-column grid for Life Hero */
         .cs-proto-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -65,7 +55,7 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             gap: 16px; width: 100%; height: 100%; cursor: pointer; background: #0a0a0a;
         }
-        .cs-proto-hint { font-size: 12px; color: rgba(255,255,255,0.28); letter-spacing: 0.4px; text-align: center; padding: 0 12px; }
+        .cs-proto-hint { font-size: 12px; color: rgba(255,255,255,0.55); letter-spacing: 0.4px; text-align: center; padding: 0 12px; }
         .cs-proto-btn {
             display: inline-flex; align-items: center; gap: 8px;
             background: var(--yellow); color: #111;
@@ -75,6 +65,7 @@
             cursor: pointer; transition: opacity 0.15s;
         }
         .cs-proto-btn:hover { opacity: 0.85; }
+        .cs-proto-btn:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
 
         @media (max-width: 768px) {
             .cs-proto-grid { grid-template-columns: 1fr; }
@@ -88,13 +79,15 @@
             max-width: 1100px; margin: 0 auto;
         }
         .cs-pnav-item { display: flex; flex-direction: column; gap: 6px; text-decoration: none; }
-        .cs-pnav-item:hover .cs-pnav-name { color: var(--yellow); }
-        .cs-pnav-dir { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+        .cs-pnav-item:hover .cs-pnav-name,
+        .cs-pnav-item:focus-visible .cs-pnav-name { color: var(--yellow); }
+        .cs-pnav-item:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
+        .cs-pnav-dir { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); }
         .cs-pnav-name { font-size: 18px; font-weight: 700; color: #fff; transition: color 0.15s; }
         .cs-pnav-next { text-align: right; }
 
         .cs-footer { padding: 24px 40px 40px; text-align: center; }
-        .cs-footer a { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.3); text-decoration: none; }
+        .cs-footer a { font-size: 14px; font-weight: 600; color: #888; text-decoration: none; }
         .cs-footer a:hover { color: var(--yellow); }
 
         @media (max-width: 600px) {
@@ -116,7 +109,7 @@
 <body>
     <div id="page-veil"></div>
 
-    <nav class="cs-nav">
+    <nav class="cs-nav" aria-label="Main">
         <a class="back-btn" href="index.html">← Back</a>
         <span class="nav-project">Life Hero</span>
         <span class="nav-name">Or Ben-Senior</span>
@@ -144,7 +137,7 @@
                     <p class="cs-proto-label">App Prototype</p>
                     <div class="cs-proto-frame">
                         <div class="cs-proto-trigger"
-                             data-src="https://embed.figma.com/proto/FrccRUCKeeTASWZ6jLsueB/life-hero-App-Prototype?node-id=1201-284386&p=f&viewport=362%2C532%2C0.06&t=eVmC9rGR9GilzSE5-1&scaling=scale-down&content-scaling=responsive&page-id=1201%3A263366&embed-host=share"
+                             data-src="https://embed.figma.com/proto/FrccRUCKeeTASWZ6jLsueB/life-hero-App-Prototype?node-id=1201-284386&p=f&viewport=362%2C532%2C0.06&t=eVmC9rGR9GilzSE5-1&scaling=scale-down&content-scaling=responsive&starting-point-node-id=1201%3A284386&page-id=1201%3A263366&embed-host=share"
                              onclick="loadProto(this)">
                             <span class="cs-proto-hint">Click to load interactive prototype</span>
                             <button class="cs-proto-btn" type="button">▶ Launch</button>
@@ -166,18 +159,16 @@
         </div>
     </section>
 
-    <div style="border-top: 1px solid rgba(255,255,255,0.06);">
-        <nav class="cs-project-nav">
-            <a href="project-digitaz.html" class="cs-pnav-item">
-                <span class="cs-pnav-dir">← Previous</span>
-                <span class="cs-pnav-name">DIGI.TAZ</span>
-            </a>
-            <a href="project-blinkage.html" class="cs-pnav-item cs-pnav-next">
-                <span class="cs-pnav-dir">Next →</span>
-                <span class="cs-pnav-name">Blinkage</span>
-            </a>
-        </nav>
-    </div>
+    <nav class="cs-project-nav" aria-label="Projects">
+        <a href="project-digitaz.html" class="cs-pnav-item">
+            <span class="cs-pnav-dir">← Previous</span>
+            <span class="cs-pnav-name">DIGI.TAZ</span>
+        </a>
+        <a href="project-blinkage.html" class="cs-pnav-item cs-pnav-next">
+            <span class="cs-pnav-dir">Next →</span>
+            <span class="cs-pnav-name">Blinkage</span>
+        </a>
+    </nav>
 
     <footer class="cs-footer">
         <a href="index.html">← Back to Portfolio</a>
@@ -187,7 +178,14 @@
         function loadProto(trigger) {
             var src = trigger.dataset.src;
             var frame = trigger.parentElement;
-            frame.innerHTML = '<iframe src="' + src + '" allowfullscreen style="width:100%;height:100%;border:none;display:block;"></iframe>';
+            var iframe = document.createElement('iframe');
+            iframe.src = src;
+            iframe.allowFullscreen = true;
+            iframe.setAttribute('tabindex', '0');
+            iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;';
+            frame.innerHTML = '';
+            frame.appendChild(iframe);
+            iframe.focus();
         }
 
         (function() {
