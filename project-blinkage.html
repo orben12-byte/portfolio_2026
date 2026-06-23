@@ -107,6 +107,7 @@
 
         @media (max-width: 600px) {
             .cs-nav { padding: 14px 20px; }
+            .nav-proto-btn { display: none; }
             .cs-live { padding: 32px 20px 0; }
             .cs-proto { padding: 40px 20px; }
             .cs-project-nav { padding: 32px 20px; }
@@ -191,7 +192,8 @@
             if (bar && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                 window.addEventListener('scroll', function() {
                     var h = document.documentElement;
-                    bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+                    var denom = h.scrollHeight - h.clientHeight;
+                    if (denom > 0) bar.style.width = (h.scrollTop / denom * 100) + '%';
                 }, { passive: true });
             }
 
