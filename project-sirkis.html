@@ -10,6 +10,15 @@
         :root { --yellow: #FFD60A; --black: #111111; --accent: #005950; }
         body { font-family: 'DM Sans', sans-serif; background: var(--black); color: #fff; }
 
+        .cs-progress {
+            position: fixed; top: 0; left: 0; z-index: 101;
+            height: 3px; width: 0%;
+            background: var(--yellow);
+            transition: width 0.08s linear;
+            pointer-events: none;
+        }
+        @media (prefers-reduced-motion: reduce) { .cs-progress { display: none !important; } }
+
         .cs-nav {
             position: sticky; top: 0; z-index: 100;
             display: flex; align-items: center; justify-content: space-between;
@@ -20,7 +29,15 @@
         .back-btn { font-size: 14px; font-weight: 600; color: var(--yellow); text-decoration: none; }
         .back-btn:hover { opacity: 0.75; }
         .nav-project { font-size: 14px; font-weight: 700; color: #fff; }
-        .nav-name { font-size: 13px; color: rgba(255,255,255,0.4); }
+        .nav-proto-btn {
+            font-size: 13px; font-weight: 600;
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            transition: color 0.15s;
+            white-space: nowrap;
+        }
+        .nav-proto-btn:hover { color: var(--yellow); }
+        .nav-proto-btn:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
 
         .cs-slides { max-width: 1100px; margin: 0 auto; }
         .cs-slides img { display: block; width: 100%; }
@@ -29,6 +46,7 @@
             background: #0d0d0d;
             padding: 64px 40px;
             border-top: 1px solid rgba(255,255,255,0.06);
+            scroll-margin-top: 60px;
         }
         .cs-proto-inner { max-width: 1100px; margin: 0 auto; }
         .cs-proto-label {
@@ -78,7 +96,6 @@
 
         @media (max-width: 600px) {
             .cs-nav { padding: 14px 20px; }
-            .nav-name { display: none; }
             .cs-proto { padding: 40px 20px; }
             .cs-project-nav { padding: 32px 20px; }
             .cs-pnav-name { font-size: 15px; }
@@ -94,11 +111,12 @@
 </head>
 <body>
     <div id="page-veil"></div>
+    <div id="cs-progress" class="cs-progress"></div>
 
     <nav class="cs-nav" aria-label="Main">
         <a class="back-btn" href="index.html">← Back</a>
         <span class="nav-project">Sirkis 21</span>
-        <span class="nav-name">Or Ben-Senior</span>
+        <a class="nav-proto-btn" href="#prototype">Prototype ↓</a>
     </nav>
 
     <main class="cs-slides">
@@ -126,7 +144,7 @@
         <img src="slides-sirkis/23.jpg" alt="" loading="lazy">
     </main>
 
-    <section class="cs-proto">
+    <section id="prototype" class="cs-proto">
         <div class="cs-proto-inner">
             <p class="cs-proto-label">Interactive Prototype</p>
             <div class="cs-proto-frame">
@@ -170,6 +188,14 @@
         }
 
         (function() {
+            var bar = document.getElementById('cs-progress');
+            if (bar && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                window.addEventListener('scroll', function() {
+                    var h = document.documentElement;
+                    bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+                }, { passive: true });
+            }
+
             var veil = document.getElementById('page-veil');
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { veil.style.display = 'none'; return; }
             requestAnimationFrame(function() { requestAnimationFrame(function() { veil.classList.add('clear'); }); });
