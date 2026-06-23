@@ -27,7 +27,7 @@
             padding: 72px 40px 64px;
             min-height: 260px; display: flex; align-items: flex-end;
         }
-        .cs-hero-inner { max-width: 900px; margin: 0 auto; width: 100%; }
+        .cs-hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
         .cs-tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 16px; }
         .cs-hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 800; letter-spacing: -1.5px; line-height: 1; }
 
@@ -46,18 +46,26 @@
             margin-bottom: 24px;
         }
         .cs-proto-frame {
-            position: relative;
-            width: 100%;
-            height: 85vh;
-            min-height: 600px;
-            border-radius: 12px;
-            overflow: hidden;
+            position: relative; width: 100%; height: 85vh; min-height: 600px;
+            border-radius: 12px; overflow: hidden;
             border: 1px solid rgba(255,255,255,0.08);
         }
-        .cs-proto-frame iframe {
-            width: 100%; height: 100%;
-            border: none; display: block;
+        .cs-proto-frame iframe { width: 100%; height: 100%; border: none; display: block; }
+        .cs-proto-trigger {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 16px; width: 100%; height: 100%; cursor: pointer;
+            background: #0a0a0a;
         }
+        .cs-proto-hint { font-size: 13px; color: rgba(255,255,255,0.28); letter-spacing: 0.4px; }
+        .cs-proto-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--yellow); color: #111;
+            font-family: 'DM Sans', sans-serif; font-weight: 700;
+            font-size: 14px; letter-spacing: 0.3px;
+            padding: 14px 28px; border-radius: 8px; border: none;
+            cursor: pointer; transition: opacity 0.15s;
+        }
+        .cs-proto-btn:hover { opacity: 0.85; }
 
         .cs-footer { padding: 48px 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
         .cs-footer a { font-size: 14px; font-weight: 600; color: var(--yellow); text-decoration: none; }
@@ -67,6 +75,7 @@
             .cs-nav { padding: 14px 20px; }
             .nav-name { display: none; }
             .cs-hero { padding: 48px 20px 40px; }
+            .cs-proto { padding: 40px 20px; }
         }
         #page-veil {
             position: fixed; inset: 0; background: var(--black);
@@ -86,7 +95,7 @@
         <span class="nav-name">Or Ben-Senior</span>
     </nav>
 
-<main class="cs-slides">
+    <main class="cs-slides">
         <img src="slides-sirkis/01.jpg" alt="Sirkis 21 — slide 1" loading="eager">
         <img src="slides-sirkis/02.jpg" alt="" loading="lazy">
         <img src="slides-sirkis/03.jpg" alt="" loading="lazy">
@@ -115,11 +124,12 @@
         <div class="cs-proto-inner">
             <p class="cs-proto-label">Interactive Prototype</p>
             <div class="cs-proto-frame">
-                <iframe
-                    src="https://embed.figma.com/proto/WaCErS6zwfxydmEEvCUBIT/2023-Project?node-id=1246-12383&viewport=2616%2C8421%2C0.33&t=epcTJhoTSx6H0NDh-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1246%3A12383&show-proto-sidebar=1&page-id=1245%3A1713&embed-host=share"
-                    allowfullscreen
-                    loading="lazy">
-                </iframe>
+                <div class="cs-proto-trigger"
+                     data-src="https://embed.figma.com/proto/WaCErS6zwfxydmEEvCUBIT/2023-Project?node-id=1246-12383&viewport=2616%2C8421%2C0.33&t=epcTJhoTSx6H0NDh-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1246%3A12383&show-proto-sidebar=1&page-id=1245%3A1713&embed-host=share"
+                     onclick="loadProto(this)">
+                    <span class="cs-proto-hint">Click to load interactive prototype</span>
+                    <button class="cs-proto-btn" type="button">▶ Launch Prototype</button>
+                </div>
             </div>
         </div>
     </section>
@@ -129,6 +139,12 @@
     </footer>
 
     <script>
+        function loadProto(trigger) {
+            var src = trigger.dataset.src;
+            var frame = trigger.parentElement;
+            frame.innerHTML = '<iframe src="' + src + '" allowfullscreen style="width:100%;height:100%;border:none;display:block;"></iframe>';
+        }
+
         (function() {
             var veil = document.getElementById('page-veil');
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { veil.style.display = 'none'; return; }

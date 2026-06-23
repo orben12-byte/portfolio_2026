@@ -45,22 +45,28 @@
             text-transform: uppercase; color: var(--yellow);
             margin-bottom: 24px;
         }
-        .cs-proto-label + .cs-proto-label { margin-top: 48px; }
-        .cs-proto-frame {
-            position: relative;
-            width: 100%;
-            height: 85vh;
-            min-height: 600px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.08);
-            margin-bottom: 0;
-        }
         .cs-proto-frame + .cs-proto-label { margin-top: 48px; }
-        .cs-proto-frame iframe {
-            width: 100%; height: 100%;
-            border: none; display: block;
+        .cs-proto-frame {
+            position: relative; width: 100%; height: 85vh; min-height: 600px;
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
         }
+        .cs-proto-frame iframe { width: 100%; height: 100%; border: none; display: block; }
+        .cs-proto-trigger {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 16px; width: 100%; height: 100%; cursor: pointer;
+            background: #0a0a0a;
+        }
+        .cs-proto-hint { font-size: 13px; color: rgba(255,255,255,0.28); letter-spacing: 0.4px; }
+        .cs-proto-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--yellow); color: #111;
+            font-family: 'DM Sans', sans-serif; font-weight: 700;
+            font-size: 14px; letter-spacing: 0.3px;
+            padding: 14px 28px; border-radius: 8px; border: none;
+            cursor: pointer; transition: opacity 0.15s;
+        }
+        .cs-proto-btn:hover { opacity: 0.85; }
 
         .cs-footer { padding: 48px 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
         .cs-footer a { font-size: 14px; font-weight: 600; color: var(--yellow); text-decoration: none; }
@@ -98,27 +104,30 @@
         <div class="cs-proto-inner">
             <p class="cs-proto-label">Onboarding Flow</p>
             <div class="cs-proto-frame">
-                <iframe
-                    src="https://embed.figma.com/proto/kx25s0IsCItHbPhWsHUbT5/the-beginning?node-id=31-339516&viewport=362%2C532%2C0.09&t=bpUqaVnIwS0pusxW-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=31%3A339516&page-id=0%3A1&embed-host=share"
-                    allowfullscreen
-                    loading="lazy">
-                </iframe>
+                <div class="cs-proto-trigger"
+                     data-src="https://embed.figma.com/proto/kx25s0IsCItHbPhWsHUbT5/the-beginning?node-id=31-339516&viewport=362%2C532%2C0.09&t=bpUqaVnIwS0pusxW-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=31%3A339516&page-id=0%3A1&embed-host=share"
+                     onclick="loadProto(this)">
+                    <span class="cs-proto-hint">Click to load interactive prototype</span>
+                    <button class="cs-proto-btn" type="button">▶ Launch Prototype</button>
+                </div>
             </div>
             <p class="cs-proto-label">App Prototype</p>
             <div class="cs-proto-frame">
-                <iframe
-                    src="https://embed.figma.com/proto/FrccRUCKeeTASWZ6jLsueB/life-hero-App-Prototype?node-id=1201-281172&p=f&viewport=362%2C532%2C0.06&t=eVmC9rGR9GilzSE5-1&scaling=min-zoom&content-scaling=responsive&page-id=1201%3A263366&embed-host=share"
-                    allowfullscreen
-                    loading="lazy">
-                </iframe>
+                <div class="cs-proto-trigger"
+                     data-src="https://embed.figma.com/proto/FrccRUCKeeTASWZ6jLsueB/life-hero-App-Prototype?node-id=1201-281172&p=f&viewport=362%2C532%2C0.06&t=eVmC9rGR9GilzSE5-1&scaling=min-zoom&content-scaling=responsive&page-id=1201%3A263366&embed-host=share"
+                     onclick="loadProto(this)">
+                    <span class="cs-proto-hint">Click to load interactive prototype</span>
+                    <button class="cs-proto-btn" type="button">▶ Launch Prototype</button>
+                </div>
             </div>
             <p class="cs-proto-label">Sidekick Selector</p>
             <div class="cs-proto-frame">
-                <iframe
-                    src="https://embed.figma.com/proto/nvpgA78RSisAVHmhiQV7RV/life-hero---Sidekick-Selector?node-id=330-320907&p=f&viewport=275%2C1063%2C0.27&t=MlEXQ8f5UmWFMUPT-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=330%3A320907&page-id=283%3A278398&embed-host=share"
-                    allowfullscreen
-                    loading="lazy">
-                </iframe>
+                <div class="cs-proto-trigger"
+                     data-src="https://embed.figma.com/proto/nvpgA78RSisAVHmhiQV7RV/life-hero---Sidekick-Selector?node-id=330-320907&p=f&viewport=275%2C1063%2C0.27&t=MlEXQ8f5UmWFMUPT-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=330%3A320907&page-id=283%3A278398&embed-host=share"
+                     onclick="loadProto(this)">
+                    <span class="cs-proto-hint">Click to load interactive prototype</span>
+                    <button class="cs-proto-btn" type="button">▶ Launch Prototype</button>
+                </div>
             </div>
         </div>
     </section>
@@ -128,6 +137,12 @@
     </footer>
 
     <script>
+        function loadProto(trigger) {
+            var src = trigger.dataset.src;
+            var frame = trigger.parentElement;
+            frame.innerHTML = '<iframe src="' + src + '" allowfullscreen style="width:100%;height:100%;border:none;display:block;"></iframe>';
+        }
+
         (function() {
             var veil = document.getElementById('page-veil');
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { veil.style.display = 'none'; return; }

@@ -34,6 +34,19 @@
         .cs-case { max-width: 1100px; margin: 0 auto; }
         .cs-case img { display: block; width: 100%; }
 
+        .cs-live {
+            padding: 40px 40px 0;
+        }
+        .cs-live-inner { max-width: 1100px; margin: 0 auto; }
+        .cs-live-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--yellow); color: #111;
+            font-weight: 700; font-size: 14px; letter-spacing: 0.3px;
+            padding: 13px 24px; border-radius: 8px; text-decoration: none;
+            transition: opacity 0.15s;
+        }
+        .cs-live-btn:hover { opacity: 0.82; }
+
         .cs-proto {
             background: #0d0d0d;
             padding: 64px 40px;
@@ -46,18 +59,26 @@
             margin-bottom: 24px;
         }
         .cs-proto-frame {
-            position: relative;
-            width: 100%;
-            height: 85vh;
-            min-height: 600px;
-            border-radius: 12px;
-            overflow: hidden;
+            position: relative; width: 100%; height: 85vh; min-height: 600px;
+            border-radius: 12px; overflow: hidden;
             border: 1px solid rgba(255,255,255,0.08);
         }
-        .cs-proto-frame iframe {
-            width: 100%; height: 100%;
-            border: none; display: block;
+        .cs-proto-frame iframe { width: 100%; height: 100%; border: none; display: block; }
+        .cs-proto-trigger {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 16px; width: 100%; height: 100%; cursor: pointer;
+            background: #0a0a0a;
         }
+        .cs-proto-hint { font-size: 13px; color: rgba(255,255,255,0.28); letter-spacing: 0.4px; }
+        .cs-proto-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--yellow); color: #111;
+            font-family: 'DM Sans', sans-serif; font-weight: 700;
+            font-size: 14px; letter-spacing: 0.3px;
+            padding: 14px 28px; border-radius: 8px; border: none;
+            cursor: pointer; transition: opacity 0.15s;
+        }
+        .cs-proto-btn:hover { opacity: 0.85; }
 
         .cs-footer { padding: 48px 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
         .cs-footer a { font-size: 14px; font-weight: 600; color: var(--yellow); text-decoration: none; }
@@ -67,6 +88,7 @@
             .cs-nav { padding: 14px 20px; }
             .nav-name { display: none; }
             .cs-hero { padding: 48px 20px 40px; }
+            .cs-live { padding: 32px 20px 0; }
             .cs-proto { padding: 40px 20px; }
         }
         #page-veil {
@@ -91,15 +113,24 @@
         <img src="blinkage-case.jpg" alt="Blinkage case study" loading="eager">
     </main>
 
+    <div class="cs-live">
+        <div class="cs-live-inner">
+            <a href="https://www.blinkage.com/" target="_blank" rel="noopener" class="cs-live-btn">
+                Visit Live Site →
+            </a>
+        </div>
+    </div>
+
     <section class="cs-proto">
         <div class="cs-proto-inner">
             <p class="cs-proto-label">Interactive Prototype</p>
             <div class="cs-proto-frame">
-                <iframe
-                    src="https://embed.figma.com/proto/WaCErS6zwfxydmEEvCUBIT/2023-Project?node-id=1-11343&p=f&viewport=369%2C551%2C0.02&t=t6yC2ry4t5i5lxxJ-1&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=1%3A11343&page-id=1%3A2&embed-host=share"
-                    allowfullscreen
-                    loading="lazy">
-                </iframe>
+                <div class="cs-proto-trigger"
+                     data-src="https://embed.figma.com/proto/WaCErS6zwfxydmEEvCUBIT/2023-Project?node-id=1-11343&p=f&viewport=369%2C551%2C0.02&t=t6yC2ry4t5i5lxxJ-1&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=1%3A11343&page-id=1%3A2&embed-host=share"
+                     onclick="loadProto(this)">
+                    <span class="cs-proto-hint">Click to load interactive prototype</span>
+                    <button class="cs-proto-btn" type="button">▶ Launch Prototype</button>
+                </div>
             </div>
         </div>
     </section>
@@ -109,6 +140,12 @@
     </footer>
 
     <script>
+        function loadProto(trigger) {
+            var src = trigger.dataset.src;
+            var frame = trigger.parentElement;
+            frame.innerHTML = '<iframe src="' + src + '" allowfullscreen style="width:100%;height:100%;border:none;display:block;"></iframe>';
+        }
+
         (function() {
             var veil = document.getElementById('page-veil');
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { veil.style.display = 'none'; return; }
