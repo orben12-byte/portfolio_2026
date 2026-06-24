@@ -322,6 +322,7 @@
         .clients {
             background: var(--yellow);
             padding: 56px 48px;
+            overflow: hidden;
         }
 
         .clients-inner {
@@ -343,6 +344,7 @@
             flex-wrap: nowrap;
             gap: 12px;
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
         }
         .clients-list::-webkit-scrollbar { display: none; }
