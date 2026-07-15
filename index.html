@@ -13,6 +13,12 @@
     <meta name="twitter:title" content="Or Ben-Senior — Product Designer">
     <meta name="twitter:description" content="Product Designer for complex systems. Enterprise SaaS and consumer apps. Based in Haifa, Israel.">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+    <script>
+        // Runs before paint so the reveal never flashes. No JS or reduced motion = cards render visible.
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('js-anim');
+        }
+    </script>
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -123,7 +129,7 @@
         .hero-tagline {
             font-size: 18px;
             font-weight: 400;
-            color: rgba(17, 17, 17, 0.65);
+            color: rgba(17, 17, 17, 0.8);
             line-height: 1.55;
             max-width: 460px;
             margin-bottom: 36px;
@@ -205,6 +211,10 @@
             text-decoration: none;
             display: block;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* Cards must stay visible if JS never runs — only the scroll-reveal path hides them first. */
+        .js-anim .card {
             opacity: 0;
             transform: translateY(28px);
         }
@@ -247,7 +257,46 @@
         }
 
         .card-thumb-sirkis {
-            background: #0d1b3e url('sirkis-cover.jpg') center/cover no-repeat;
+            background: linear-gradient(150deg, #1b3161 0%, #0d1b3e 100%);
+        }
+
+        .sirkis-cover {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 12px;
+            padding: 24px;
+        }
+
+        .sirkis-badge {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--orange);
+            color: #fff;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sirkis-name {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 800;
+            font-size: 30px;
+            letter-spacing: -0.5px;
+            color: #fff;
+        }
+
+        .sirkis-tag {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.85);
+            max-width: 300px;
+            line-height: 1.4;
         }
 
         .card-thumb-digitaz {
@@ -692,7 +741,11 @@
             <!-- Sirkis 21 -->
             <a class="card" href="project-sirkis.html">
                 <div class="card-thumb card-thumb-sirkis">
-                    <span class="card-thumb-label" style="display:none">SIRKIS 21</span>
+                    <div class="sirkis-cover">
+                        <span class="sirkis-badge">21</span>
+                        <span class="sirkis-name">Sirkis 21</span>
+                        <span class="sirkis-tag">A story-driven navigation app for a local food market</span>
+                    </div>
                 </div>
                 <div class="card-body">
                     <p class="card-meta">Product Design · Consumer App · Food</p>
@@ -833,7 +886,7 @@
         }
 
         // ── CARD SCROLL ENTRANCE ──
-        if (!reducedMotion) {
+        if (!reducedMotion && 'IntersectionObserver' in window) {
             const cards = Array.from(document.querySelectorAll('.card'));
             const cardObs = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
