@@ -12,7 +12,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Or Ben-Senior — Product Designer">
     <meta name="twitter:description" content="Product Designer for complex systems. Enterprise SaaS and consumer apps.">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script>
         // Runs before paint so the reveal never flashes. No JS or reduced motion = cards render visible.
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -30,15 +30,22 @@
             --white:  #FFFFFF;
             --muted:  #999999;
             --max:    1100px;
+            --sans:   'Archivo', sans-serif;
+            --mono:   'Space Mono', monospace;
         }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: var(--sans);
             background: var(--black);
             color: var(--white);
             overflow-x: hidden;
+        }
+
+        /* Brutalist type system: Archivo everywhere, Space Mono for the small technical labels */
+        .hero-tag, .card-meta, .clients-label, .section-count, .card-thumb::after {
+            font-family: var(--mono);
         }
 
         /* ── NAV ── */
@@ -55,8 +62,8 @@
         }
 
         .nav-name {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 800;
+            font-family: var(--sans);
+            font-weight: 900;
             font-size: 16px;
             color: var(--black);
             text-decoration: none;
@@ -117,8 +124,8 @@
         }
 
         .hero-name {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 800;
+            font-family: var(--sans);
+            font-weight: 900;
             font-size: clamp(52px, 7vw, 80px);
             color: var(--black);
             line-height: 1;
@@ -181,8 +188,8 @@
         }
 
         .section-title {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 800;
+            font-family: var(--sans);
+            font-weight: 900;
             font-size: clamp(32px, 4vw, 44px);
             letter-spacing: -1.5px;
         }
@@ -241,8 +248,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 800;
+            font-family: var(--sans);
+            font-weight: 900;
             font-size: 13px;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -275,8 +282,8 @@
             border-radius: 50%;
             background: var(--orange);
             color: #fff;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 800;
+            font-family: var(--sans);
+            font-weight: 900;
             font-size: 24px;
             display: flex;
             align-items: center;
@@ -284,8 +291,8 @@
         }
 
         .sirkis-name {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 800;
+            font-family: var(--sans);
+            font-weight: 900;
             font-size: 30px;
             letter-spacing: -0.5px;
             color: #fff;
@@ -351,8 +358,8 @@
         }
 
         .card-title {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 800;
+            font-family: var(--sans);
+            font-weight: 900;
             font-size: 22px;
             letter-spacing: -0.5px;
             color: var(--white);
@@ -426,8 +433,8 @@
         }
 
         .about-text h2 {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 800;
+            font-family: var(--sans);
+            font-weight: 900;
             font-size: clamp(32px, 4vw, 44px);
             letter-spacing: -1.5px;
             margin-bottom: 20px;
@@ -468,8 +475,8 @@
         .stat-card-wide { grid-column: 1 / -1; }
 
         .stat-number {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 800;
+            font-family: var(--sans);
+            font-weight: 900;
             font-size: 40px;
             letter-spacing: -2px;
             color: var(--yellow);
@@ -501,8 +508,8 @@
         }
 
         .footer-left h3 {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 800;
+            font-family: var(--sans);
+            font-weight: 900;
             font-size: 22px;
             letter-spacing: -0.5px;
             margin-bottom: 6px;

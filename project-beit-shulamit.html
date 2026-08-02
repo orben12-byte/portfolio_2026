@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beit Shulamit — Or Ben-Senior</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -14,15 +14,18 @@
             --white:  #FFFFFF;
             --muted:  #777777;
             --max:    1100px;
+            --sans:   'Archivo', sans-serif;
+            --mono:   'Space Mono', monospace;
         }
         html { scroll-behavior: smooth; }
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: var(--sans);
             background: var(--black);
             color: var(--white);
             overflow-x: hidden;
             min-height: 100vh;
         }
+        .hero-category, .badge { font-family: var(--mono); }
         nav {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -35,7 +38,7 @@
             backdrop-filter: blur(8px);
         }
         .nav-name {
-            font-weight: 800;
+            font-weight: 900;
             font-size: 16px;
             color: var(--black);
             text-decoration: none;
@@ -72,7 +75,7 @@
         }
         .hero-title {
             font-size: clamp(36px, 6vw, 72px);
-            font-weight: 800;
+            font-weight: 900;
             letter-spacing: -2px;
             line-height: 1;
             color: #111111;
@@ -106,7 +109,7 @@
         }
         .coming-soon h2 {
             font-size: 28px;
-            font-weight: 800;
+            font-weight: 900;
             letter-spacing: -0.5px;
             margin-bottom: 16px;
         }
