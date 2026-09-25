@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noviopus — Or Ben-Senior</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --yellow: #FFD60A; --black: #111111; --accent: #005950; }
+        body { font-family: 'Archivo', sans-serif; background: var(--black); color: #fff; }
+        .cs-proto-label, .cs-pnav-dir { font-family: 'Space Mono', monospace; }
+
+        .cs-progress {
+            position: fixed; top: 0; left: 0; z-index: 101;
+            height: 3px; width: 0%;
+            background: var(--yellow);
+            transition: width 0.08s linear;
+            pointer-events: none;
+        }
+        @media (prefers-reduced-motion: reduce) { .cs-progress { display: none !important; } }
+
+        .cs-nav {
+            position: sticky; top: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 40px;
+            background: rgba(17,17,17,0.96); backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .back-btn { font-size: 14px; font-weight: 600; color: var(--yellow); text-decoration: none; }
+        .back-btn:hover { opacity: 0.75; }
+        .nav-project { font-size: 14px; font-weight: 700; color: #fff; }
+        .nav-proto-btn {
+            font-size: 13px; font-weight: 600;
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            transition: color 0.15s;
+            white-space: nowrap;
+        }
+        .nav-proto-btn:hover { color: var(--yellow); }
+        .nav-proto-btn:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
+
+        .cs-slides { max-width: 1100px; margin: 0 auto; }
+        .cs-slides img { display: block; width: 100%; }
+
+        .cs-proto {
+            background: #0d0d0d;
+            padding: 64px 40px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            scroll-margin-top: 60px;
+        }
+        .cs-proto-inner { max-width: 1100px; margin: 0 auto; }
+        .cs-proto-label {
+            font-size: 11px; font-weight: 600; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--yellow);
+            margin-bottom: 24px;
+        }
+        .cs-proto-frame {
+            position: relative; width: 100%; height: 85vh; min-height: 600px;
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .cs-proto-frame iframe { width: 100%; height: 100%; border: none; display: block; }
+        .cs-proto-trigger {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 16px; width: 100%; height: 100%; cursor: pointer; background: #0a0a0a;
+        }
+        .cs-proto-hint { font-size: 13px; color: rgba(255,255,255,0.55); letter-spacing: 0.4px; }
+        .cs-proto-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--yellow); color: #111;
+            font-family: 'Archivo', sans-serif; font-weight: 700;
+            font-size: 14px; letter-spacing: 0.3px;
+            padding: 14px 28px; border-radius: 8px; border: none;
+            cursor: pointer; transition: opacity 0.15s;
+        }
+        .cs-proto-btn:hover { opacity: 0.85; }
+        .cs-proto-btn:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+
+        .cs-project-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 40px 40px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            max-width: 1100px; margin: 0 auto;
+        }
+        .cs-pnav-item { display: flex; flex-direction: column; gap: 6px; text-decoration: none; }
+        .cs-pnav-item:hover .cs-pnav-name,
+        .cs-pnav-item:focus-visible .cs-pnav-name { color: var(--yellow); }
+        .cs-pnav-item:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
+        .cs-pnav-dir { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+        .cs-pnav-name { font-size: 18px; font-weight: 700; color: #fff; transition: color 0.15s; }
+        .cs-pnav-next { text-align: right; }
+
+        .cs-footer { padding: 24px 40px 40px; text-align: center; }
+        .cs-footer a { font-size: 14px; font-weight: 600; color: #888; text-decoration: none; }
+        .cs-footer a:hover { color: var(--yellow); }
+
+        @media (max-width: 600px) {
+            .cs-nav { padding: 14px 20px; }
+            .nav-proto-btn { display: none; }
+            .cs-proto { padding: 40px 20px; }
+            .cs-project-nav { padding: 32px 20px; }
+            .cs-pnav-name { font-size: 15px; }
+        }
+        #page-veil {
+            position: fixed; inset: 0; background: var(--black);
+            z-index: 9998; pointer-events: none;
+            opacity: 1; transition: opacity 0.28s ease;
+        }
+        #page-veil.clear { opacity: 0; }
+        @media (prefers-reduced-motion: reduce) { #page-veil { display: none !important; } }
+
+        /* ── Noviopus intro ───────────────────────────── */
+        .np-intro { max-width: 900px; margin: 0 auto; padding: 120px 24px 48px; }
+        .np-cat {
+            font-family: var(--mono, 'Space Mono', monospace);
+            font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+            color: var(--yellow, #FFD60A); margin-bottom: 14px;
+        }
+        .np-title {
+            font-size: clamp(34px, 6vw, 64px); font-weight: 900;
+            letter-spacing: -2px; line-height: 1; margin-bottom: 20px;
+        }
+        .np-lede { font-size: 17px; line-height: 1.65; opacity: 0.78; max-width: 640px; }
+        .np-facts {
+            display: flex; flex-wrap: wrap; gap: 28px 44px;
+            margin-top: 34px; padding-top: 26px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .np-fact-label {
+            font-family: var(--mono, 'Space Mono', monospace);
+            font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+            opacity: 0.45; margin-bottom: 6px;
+        }
+        .np-fact-value { font-size: 15px; font-weight: 600; }
+        @media (max-width: 600px) {
+            .np-intro { padding: 96px 20px 36px; }
+            .np-facts { gap: 20px 30px; }
+        }
+
+        /* ── Noviopus: annotated sections ───────────────── */
+        .np-body { max-width: 1100px; margin: 0 auto; padding: 0 24px 40px; }
+        .np-block { margin-bottom: 88px; }
+        .np-head { max-width: 640px; margin-bottom: 22px; }
+        .np-num {
+            font-family: var(--mono, 'Space Mono', monospace);
+            font-size: 11px; letter-spacing: 1px;
+            color: var(--yellow, #FFD60A); opacity: 0.85; margin-bottom: 10px;
+        }
+        .np-h {
+            font-size: clamp(21px, 2.6vw, 27px); font-weight: 900;
+            letter-spacing: -0.5px; margin-bottom: 10px;
+        }
+        .np-p { font-size: 15.5px; line-height: 1.65; opacity: 0.7; }
+        .np-shot {
+            width: 100%; display: block; border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.09);
+        }
+        .np-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+        }
+        .np-grid figure { margin: 0; }
+        .np-grid .np-shot { border-radius: 8px; }
+        .np-label {
+            font-family: var(--mono, 'Space Mono', monospace);
+            font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+            opacity: 0.5; margin-top: 10px;
+        }
+        @media (max-width: 760px) {
+            .np-block { margin-bottom: 60px; }
+            .np-grid { gap: 10px; }
+            .np-body { padding: 0 20px 30px; }
+        }
+    </style>
+    <!-- GoatCounter analytics (self-hosted count.js) -->
+    <script data-goatcounter="https://orben29.goatcounter.com/count"
+            async src="count.js"></script>
+</head>
+<body>
+    <div id="page-veil"></div>
+    <div id="cs-progress" class="cs-progress"></div>
+
+    <nav class="cs-nav" aria-label="Main">
+        <a class="back-btn" href="index.html">← Back</a>
+        <span class="nav-project">Noviopus</span>
+    </nav>
+
+    <section class="np-intro">
+        <p class="np-cat">Product Design · B2B SaaS · Messaging</p>
+        <h1 class="np-title">Noviopus</h1>
+        <p class="np-lede">Messaging experience for a careers platform where candidates and employers
+            talk directly. I designed the flow end to end for desktop and mobile: composing a message,
+            categorised inboxes, time-period filtering and the overlay menus that hold it together —
+            delivered as high-fidelity screens covering every state.</p>
+        <div class="np-facts">
+            <div>
+                <p class="np-fact-label">Role</p>
+                <p class="np-fact-value">UX/UI Designer</p>
+            </div>
+            <div>
+                <p class="np-fact-label">Engagement</p>
+                <p class="np-fact-value">Volunteer · Remote</p>
+            </div>
+            <div>
+                <p class="np-fact-label">Year</p>
+                <p class="np-fact-value">2023 – 2025</p>
+            </div>
+            <div>
+                <p class="np-fact-label">Platforms</p>
+                <p class="np-fact-value">Desktop &amp; Mobile</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="np-body">
+        <section class="np-block">
+            <div class="np-head">
+                <p class="np-num">01 · The surface</p>
+                <h2 class="np-h">Three columns, always in the same place</h2>
+                <p class="np-p">The three columns never move. Whatever you open, the anchors stay where your eye left them — so the product never has to be re-read.</p>
+            </div>
+            <img class="np-shot" src="slides-noviopus/01.jpg" alt="Noviopus — messages, desktop" loading="lazy">
+        </section>
+
+        <section class="np-block">
+            <div class="np-head">
+                <p class="np-num">02 · Categories</p>
+                <h2 class="np-h">One inbox, five contexts</h2>
+                <p class="np-p">New, Starred, Private, Work and Jobs are not five screens. They are one screen with a different list — so moving between them costs the user nothing to relearn.</p>
+            </div>
+            <div class="np-grid">
+                <figure>
+                    <img class="np-shot" src="slides-noviopus/cat-work.jpg" alt="Work inbox — navigation and list" loading="lazy">
+                    <p class="np-label">Work</p>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-noviopus/cat-private.jpg" alt="Private inbox — navigation and list" loading="lazy">
+                    <p class="np-label">Private</p>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-noviopus/cat-starred.jpg" alt="Starred inbox — navigation and list" loading="lazy">
+                    <p class="np-label">Starred</p>
+                </figure>
+            </div>
+        </section>
+
+        <section class="np-block">
+            <div class="np-head">
+                <p class="np-num">03 · Composing</p>
+                <h2 class="np-h">Writing without losing your place</h2>
+                <p class="np-p">Compose replaces the conversation list with a recipient picker and leaves the thread where it was, so starting a new message never clears the screen you were reading.</p>
+            </div>
+            <img class="np-shot" src="slides-noviopus/02.jpg" alt="Noviopus — compose a message" loading="lazy">
+        </section>
+
+        <section class="np-block">
+            <div class="np-head">
+                <p class="np-num">04 · Filtering</p>
+                <h2 class="np-h">Finding a message by when it happened</h2>
+                <p class="np-p">Filtering opens from the thread header instead of a separate search screen, so narrowing a long conversation never costs you the conversation.</p>
+            </div>
+            <img class="np-shot" src="slides-noviopus/03.jpg" alt="Noviopus — time period filter" loading="lazy">
+        </section>
+
+        <section class="np-block">
+            <div class="np-head">
+                <p class="np-num">05 · Mobile</p>
+                <h2 class="np-h">The same model at 360px</h2>
+                <p class="np-p">The three columns collapse to one and the navigation becomes an overlay. Nothing is dropped — the structure is the same one, folded.</p>
+            </div>
+            <img class="np-shot" src="slides-noviopus/04.jpg" alt="Noviopus — mobile messaging" loading="lazy">
+            <div style="height:18px"></div>
+            <img class="np-shot" src="slides-noviopus/05.jpg" alt="Noviopus — mobile overlay menus" loading="lazy">
+        </section>
+
+    </div>
+
+    <nav class="cs-project-nav" aria-label="Projects">
+        <a href="project-blinkage.html" class="cs-pnav-item">
+            <span class="cs-pnav-dir">← Previous</span>
+            <span class="cs-pnav-name">Blinkage</span>
+        </a>
+        <a href="project-sirkis.html" class="cs-pnav-item cs-pnav-next">
+            <span class="cs-pnav-dir">Next →</span>
+            <span class="cs-pnav-name">Sirkis 21</span>
+        </a>
+    </nav>
+
+    <footer class="cs-footer">
+        <a href="index.html">← Back to Portfolio</a>
+    </footer>
+
+    <script>
+        function loadProto(trigger) {
+            var src = trigger.dataset.src;
+            var frame = trigger.parentElement;
+            var iframe = document.createElement('iframe');
+            iframe.src = src;
+            iframe.allowFullscreen = true;
+            iframe.setAttribute('tabindex', '0');
+            iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;';
+            frame.innerHTML = '';
+            frame.appendChild(iframe);
+            iframe.focus();
+        }
+
+        (function() {
+            var bar = document.getElementById('cs-progress');
+            if (bar && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                window.addEventListener('scroll', function() {
+                    var h = document.documentElement;
+                    var denom = h.scrollHeight - h.clientHeight;
+                    if (denom > 0) bar.style.width = (h.scrollTop / denom * 100) + '%';
+                }, { passive: true });
+            }
+
+            var veil = document.getElementById('page-veil');
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { veil.style.display = 'none'; return; }
+            requestAnimationFrame(function() { requestAnimationFrame(function() { veil.classList.add('clear'); }); });
+            document.querySelectorAll('a[href]').forEach(function(link) {
+                var href = link.getAttribute('href');
+                if (!href || href.charAt(0) === '#' || href.startsWith('mailto:') || href.startsWith('tel:') || link.target === '_blank') return;
+                if (/^https?:\/\//.test(href)) return;
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    veil.classList.remove('clear');
+                    setTimeout(function() { window.location.href = href; }, 300);
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
