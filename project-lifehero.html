@@ -43,6 +43,48 @@
         .cs-case { max-width: 1100px; margin: 0 auto; }
         .cs-case img { display: block; width: 100%; }
 
+        .cs-principles {
+            padding: 80px 40px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .cs-principles-inner { max-width: 820px; margin: 0 auto; }
+        .cs-sec-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px; font-weight: 700; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--yellow);
+            margin-bottom: 18px;
+        }
+        .cs-sec-title {
+            font-size: 34px; font-weight: 800; line-height: 1.15;
+            letter-spacing: -0.5px; margin-bottom: 14px;
+        }
+        .cs-sec-intro {
+            font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.62);
+            margin-bottom: 56px; max-width: 640px;
+        }
+        .cs-principle {
+            padding: 28px 0;
+            border-top: 1px solid rgba(255,255,255,0.09);
+        }
+        .cs-principle:last-child { border-bottom: 1px solid rgba(255,255,255,0.09); }
+        .cs-law {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--black); background: var(--yellow);
+            padding: 5px 11px; border-radius: 6px;
+            margin-bottom: 16px;
+        }
+        .cs-principle p {
+            font-size: 18px; line-height: 1.62; color: rgba(255,255,255,0.9);
+        }
+        @media (max-width: 600px) {
+            .cs-principles { padding: 56px 20px; }
+            .cs-sec-title { font-size: 26px; }
+            .cs-principle p { font-size: 16px; }
+        }
+
         .cs-proto {
             background: #0d0d0d;
             padding: 64px 40px;
@@ -141,6 +183,24 @@
     <main class="cs-case">
         <img src="lifehero-case.jpg" alt="Life Hero case study" loading="eager">
     </main>
+
+    <section class="cs-principles">
+        <div class="cs-principles-inner">
+            <p class="cs-sec-label">The Thinking</p>
+            <h2 class="cs-sec-title">Designed around how habits actually form</h2>
+            <p class="cs-sec-intro">Most habit apps ask you to check off a task. Life Hero asks you to <em>become someone</em> — a comic-book hero who grows stronger every time you show up. That shift, from tracking a behaviour to levelling up a hero, is the strategic spine of the product. Every system below serves it.</p>
+
+            <div class="cs-principle">
+                <span class="cs-law">Zeigarnik Effect</span>
+                <p>We remember what's unfinished. So I didn't rely on one progress bar — I layered open loops. Your hero sits mid-rank, part-way to the next level. Each habit is itself a levelling creature with its own bar. The weekly boss runs on a 24-hour countdown. Costumes and achievements wait half-collected. Every loop autosaves and shows a clear path to completion, so incompleteness reads as momentum — not guilt.</p>
+            </div>
+
+            <div class="cs-principle">
+                <span class="cs-law">Peak-End Rule</span>
+                <p>An experience is judged by its most intense moment and its last — not the average. The recurring peak is the weekly boss battle: a timed fight with HP bars where each completed challenge visibly lands a hit. And the arc is deliberate from minute one — onboarding lets you lose a fight, drops you to a blunt "YOU DIED" screen, then a Sidekick reaches down and pulls you back up. Defeat, then a hand reaching down: that's the moment a user remembers, and it's engineered.</p>
+            </div>
+        </div>
+    </section>
 
     <section id="prototype" class="cs-proto">
         <div class="cs-proto-inner">
