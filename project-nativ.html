@@ -166,10 +166,17 @@
             font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
             opacity: 0.5; margin-top: 10px;
         }
+        .np-note {
+            max-width: 640px; margin: 0 0 88px;
+            padding-left: 18px;
+            border-left: 2px solid var(--yellow, #FFD60A);
+        }
+        .np-note .np-num { margin-bottom: 8px; }
         @media (max-width: 760px) {
             .np-block { margin-bottom: 60px; }
             .np-grid { gap: 10px; }
             .np-body { padding: 0 20px 30px; }
+            .np-note { margin-bottom: 60px; }
         }
     </style>
     <!-- GoatCounter analytics (self-hosted count.js) -->
@@ -267,6 +274,20 @@
             </div>
             <img class="np-shot" src="slides-nativ/05-mobile.jpg" alt="Nativ — mobile screens" loading="lazy">
         </section>
+
+        <section class="np-block">
+            <div class="np-head">
+                <p class="np-num">07 · The system</p>
+                <h2 class="np-h">Built in states, not in screens</h2>
+                <p class="np-p">Five component groups, each drawn in every state it meets: empty and filled, enabled and disabled, checked and not, truncated and open. Six processes were built from this one sheet.</p>
+            </div>
+            <img class="np-shot" src="slides-nativ/06-component-library.png" alt="Nativ — the component library: sidebar, buttons and fields, notes, students and checkbox, each in multiple states" loading="lazy">
+        </section>
+
+        <aside class="np-note">
+            <p class="np-num">What I'd do differently</p>
+            <p class="np-p">The library did its job inside the design. What it never got was a written layer — the developers received screens, not documented patterns. It lived in Figma and in my head, which is one person away from not existing.</p>
+        </aside>
 
     </div>
 
