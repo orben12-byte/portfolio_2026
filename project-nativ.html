@@ -111,7 +111,7 @@
         @media (prefers-reduced-motion: reduce) { #page-veil { display: none !important; } }
 
         /* ── Noviopus intro ───────────────────────────── */
-        .np-intro { max-width: 900px; margin: 0 auto; padding: 120px 24px 48px; }
+        .np-intro { max-width: 1100px; margin: 0 auto; padding: 120px 24px 48px; }
         .np-cat {
             font-family: var(--mono, 'Space Mono', monospace);
             font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
@@ -165,6 +165,18 @@
             font-family: var(--mono, 'Space Mono', monospace);
             font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
             opacity: 0.5; margin-top: 10px;
+        }
+        .np-bleed { max-width: none; margin: 0 0 88px; padding: 0; }
+        .np-bleed .np-head-wrap {
+            max-width: 1100px; margin: 0 auto; padding: 0 24px;
+        }
+        .np-bleed .np-shot {
+            width: calc(100% - 48px); margin: 0 24px; border-radius: 0;
+        }
+        @media (max-width: 760px) {
+            .np-bleed { margin-bottom: 60px; }
+            .np-bleed .np-head-wrap { padding: 0 20px; }
+            .np-bleed .np-shot { width: calc(100% - 40px); margin: 0 20px; }
         }
         .np-note {
             max-width: 640px; margin: 0 0 88px;
@@ -275,14 +287,20 @@
             <img class="np-shot" src="slides-nativ/05-mobile.jpg" alt="Nativ — mobile screens" loading="lazy">
         </section>
 
-        <section class="np-block">
+    </div>
+
+    <section class="np-block np-bleed">
+        <div class="np-head-wrap">
             <div class="np-head">
                 <p class="np-num">07 · The system</p>
                 <h2 class="np-h">The sheet the product came from</h2>
                 <p class="np-p">Five groups of components, each drawn in the states it would meet in use. Six processes were assembled from them, which is why they look like one product.</p>
             </div>
-            <img class="np-shot" src="slides-nativ/06-component-library.png" alt="Nativ — the component library: sidebar, buttons and fields, notes, students and checkbox, each in multiple states" loading="lazy">
-        </section>
+        </div>
+        <img class="np-shot" src="slides-nativ/06-component-library.png" alt="Nativ — the component library: sidebar, buttons and fields, notes, students and checkbox, each in multiple states" loading="lazy">
+    </section>
+
+    <div class="np-body">
 
         <aside class="np-note">
             <p class="np-num">What I'd do differently</p>
