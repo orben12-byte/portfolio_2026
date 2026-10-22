@@ -40,9 +40,6 @@
         .nav-proto-btn:hover { color: var(--yellow); }
         .nav-proto-btn:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
 
-        .cs-case { max-width: 1100px; margin: 0 auto; }
-        .cs-case img { display: block; width: 100%; }
-
         .cs-proto {
             background: #0d0d0d;
             padding: 64px 40px;
@@ -95,6 +92,73 @@
         .cs-footer a { font-size: 14px; font-weight: 600; color: #888; text-decoration: none; }
         .cs-footer a:hover { color: var(--yellow); }
 
+        /* -- case sections (same language as Nativ / Noviopus) -- */
+        .np-intro { max-width: 1100px; margin: 0 auto; padding: 120px 24px 48px; }
+        .np-cat {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+            color: var(--yellow); margin-bottom: 14px;
+        }
+        .np-title {
+            font-size: clamp(34px, 6vw, 64px); font-weight: 900;
+            letter-spacing: -2px; line-height: 1; margin-bottom: 20px;
+        }
+        .np-lede { font-size: 17px; line-height: 1.65; opacity: 0.78; max-width: 640px; }
+        .np-facts {
+            display: flex; flex-wrap: wrap; gap: 28px 44px;
+            margin-top: 34px; padding-top: 26px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .np-fact-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+            opacity: 0.45; margin-bottom: 6px;
+        }
+        .np-fact-value { font-size: 15px; font-weight: 600; }
+
+        .np-body { max-width: 1100px; margin: 0 auto; padding: 0 24px 40px; }
+        .np-block { margin-bottom: 88px; }
+        .np-head { max-width: 640px; margin-bottom: 22px; }
+        .np-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px; letter-spacing: 1px;
+            color: var(--yellow); opacity: 0.85; margin-bottom: 10px;
+        }
+        .np-h {
+            font-size: clamp(21px, 2.6vw, 27px); font-weight: 900;
+            letter-spacing: -0.5px; margin-bottom: 10px;
+        }
+        .np-p { font-size: 15.5px; line-height: 1.65; opacity: 0.7; }
+        .np-shot {
+            width: 100%; display: block; border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.09);
+        }
+        .np-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .np-grid figure { margin: 0; }
+        /* sources differ by a pixel or two; pin the phone ratio so captions line up */
+        .np-grid .np-shot { border-radius: 8px; aspect-ratio: 375 / 812; object-fit: cover; }
+        .np-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+            opacity: 0.5; margin-top: 10px;
+        }
+        .np-note {
+            max-width: 640px; margin: 0 0 88px;
+            padding-left: 18px;
+            border-left: 2px solid var(--yellow);
+        }
+        .np-note .np-num { margin-bottom: 8px; }
+        /* .np-intro and .np-body must narrow together or the title loses the left edge */
+        @media (max-width: 760px) {
+            .np-intro { padding: 96px 20px 36px; }
+            .np-facts { gap: 20px 30px; }
+            .np-block { margin-bottom: 60px; }
+            /* three phone screens side by side collapse to 105px on a phone — stack them */
+            .np-grid { grid-template-columns: 1fr; gap: 18px; max-width: 340px; }
+            .np-body { padding: 0 20px 30px; }
+            .np-note { margin-bottom: 60px; }
+        }
+
         @media (max-width: 600px) {
             .cs-nav { padding: 14px 20px; }
             .nav-proto-btn { display: none; }
@@ -124,8 +188,82 @@
         <a class="nav-proto-btn" href="#prototype">Prototype ↓</a>
     </nav>
 
-    <main class="cs-case">
-        <img src="digitaz-case.jpg" alt="DIGI.TAZ case study" loading="eager">
+    <section class="np-intro">
+        <p class="np-cat">Product Design &middot; Government &middot; Mobile</p>
+        <h1 class="np-title">DIGI.TAZ</h1>
+        <p class="np-lede">A proof of concept for a client who wanted to pitch a government identity wallet.
+            My part was the way in: turning a physical passport into a verified identity on a phone,
+            through three checks that each answer a different question.</p>
+        <div class="np-facts">
+            <div><p class="np-fact-label">Role</p><p class="np-fact-value">UX &amp; UI</p></div>
+            <div><p class="np-fact-label">Type</p><p class="np-fact-value">Proof of concept</p></div>
+            <div><p class="np-fact-label">Year</p><p class="np-fact-value">2021&ndash;2022</p></div>
+            <div><p class="np-fact-label">Scope</p><p class="np-fact-value">Onboarding</p></div>
+        </div>
+    </section>
+
+    <main class="np-body">
+        <section class="np-block">
+            <div class="np-head">
+                <p class="np-num">01 &middot; The three gates</p>
+                <h2 class="np-h">Read it, prove it, match it</h2>
+                <p class="np-p">Scanning the data page reads what the passport says. Reading the chip proves the
+                    passport is real. Scanning a face proves it belongs to the person holding it. Three steps
+                    that look alike and answer nothing alike.</p>
+            </div>
+            <div class="np-grid">
+                <figure>
+                    <img class="np-shot" src="slides-digitaz/01-passport.gif"
+                         alt="The data page of a passport being scanned inside a frame" loading="lazy">
+                    <figcaption class="np-label">01 &middot; Read &mdash; the data page</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-digitaz/02-nfc.gif"
+                         alt="A phone held against the back of a passport to read its chip" loading="lazy">
+                    <figcaption class="np-label">02 &middot; Prove &mdash; the chip</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-digitaz/03-face.png"
+                         alt="A face inside a circle, confirmed with a green ring" loading="lazy">
+                    <figcaption class="np-label">03 &middot; Match &mdash; the face</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="np-block">
+            <div class="np-head">
+                <p class="np-num">02 &middot; The gate that fails</p>
+                <h2 class="np-h">Three screens for one unreliable sensor</h2>
+                <p class="np-p">The chip does not always read. One screen says where the chip is. One names the
+                    three real reasons a read fails, including a sensor that sits in a different place on every
+                    manufacturer's phone. One catches NFC switched off entirely.</p>
+            </div>
+            <div class="np-grid">
+                <figure>
+                    <img class="np-shot" src="slides-digitaz/04-chip.gif"
+                         alt="An explainer showing where the chip sits inside the passport" loading="lazy">
+                    <figcaption class="np-label">Where the chip is</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-digitaz/05-retry.png"
+                         alt="A retry screen listing three illustrated reasons a chip read fails" loading="lazy">
+                    <figcaption class="np-label">Why it failed</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-digitaz/06-nfc-off.png"
+                         alt="A screen telling the user their NFC reader is switched off" loading="lazy">
+                    <figcaption class="np-label">NFC switched off</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="np-note">
+            <p class="np-num">Scope</p>
+            <h2 class="np-h">What this never became</h2>
+            <p class="np-p">We designed the way in, not what waits inside. The wallet itself &mdash; and the
+                identity card, driving licence and health-fund card meant to sit in it &mdash; stayed a
+                sentence in the brief.</p>
+        </section>
     </main>
 
     <section id="prototype" class="cs-proto">
