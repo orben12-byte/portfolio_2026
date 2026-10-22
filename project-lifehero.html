@@ -40,14 +40,17 @@
         .nav-proto-btn:hover { color: var(--yellow); }
         .nav-proto-btn:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
 
-        .cs-case { max-width: 1100px; margin: 0 auto; }
+        /* 1180 = 1100 of image + the same 40px gutter the text section has,
+           so both keep one left edge at every width above mobile */
+        .cs-case { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
         .cs-case img { display: block; width: 100%; }
 
         .cs-principles {
             padding: 80px 40px;
             border-top: 1px solid rgba(255,255,255,0.06);
         }
-        .cs-principles-inner { max-width: 820px; margin: 0 auto; }
+        /* same 1100px box as .cs-case, so the text starts on the image's left edge */
+        .cs-principles-inner { max-width: 1100px; margin: 0 auto; }
         .cs-sec-label {
             font-family: 'Space Mono', monospace;
             font-size: 11px; font-weight: 700; letter-spacing: 3px;
@@ -78,6 +81,7 @@
         }
         .cs-principle p {
             font-size: 18px; line-height: 1.62; color: rgba(255,255,255,0.9);
+            max-width: 720px;
         }
         @media (max-width: 600px) {
             .cs-principles { padding: 56px 20px; }
@@ -153,6 +157,7 @@
 
         @media (max-width: 600px) {
             .cs-nav { padding: 14px 20px; }
+            .cs-case { padding: 0; }
             .nav-proto-btn { display: none; }
             .cs-proto { padding: 40px 20px; }
             .cs-project-nav { padding: 32px 20px; }

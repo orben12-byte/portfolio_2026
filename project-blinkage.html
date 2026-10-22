@@ -40,7 +40,9 @@
         .nav-proto-btn:hover { color: var(--yellow); }
         .nav-proto-btn:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
 
-        .cs-case { max-width: 1100px; margin: 0 auto; }
+        /* 1180 = 1100 of image + the same 40px gutter the text section has,
+           so both keep one left edge at every width above mobile */
+        .cs-case { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
         .cs-case img { display: block; width: 100%; }
 
         .cs-live { padding: 40px 40px 0; }
@@ -106,11 +108,54 @@
         .cs-footer a { font-size: 14px; font-weight: 600; color: #888; text-decoration: none; }
         .cs-footer a:hover { color: var(--yellow); }
 
+        .cs-principles {
+            padding: 80px 40px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        /* same 1100px box as .cs-case, so the text starts on the image's left edge */
+        .cs-principles-inner { max-width: 1100px; margin: 0 auto; }
+        .cs-sec-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px; font-weight: 700; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--yellow);
+            margin-bottom: 18px;
+        }
+        .cs-sec-title {
+            font-size: 34px; font-weight: 800; line-height: 1.15;
+            letter-spacing: -0.5px; margin-bottom: 14px;
+        }
+        .cs-sec-intro {
+            font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.62);
+            margin-bottom: 56px; max-width: 640px;
+        }
+        .cs-principle {
+            padding: 28px 0;
+            border-top: 1px solid rgba(255,255,255,0.09);
+        }
+        .cs-principle:last-child { border-bottom: 1px solid rgba(255,255,255,0.09); }
+        .cs-law {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--black); background: var(--yellow);
+            padding: 5px 11px; border-radius: 6px;
+            margin-bottom: 16px;
+        }
+        .cs-principle p {
+            font-size: 18px; line-height: 1.62; color: rgba(255,255,255,0.9);
+            max-width: 720px;
+        }
+
         @media (max-width: 600px) {
             .cs-nav { padding: 14px 20px; }
+            .cs-case { padding: 0; }
             .nav-proto-btn { display: none; }
             .cs-live { padding: 32px 20px 0; }
             .cs-proto { padding: 40px 20px; }
+            .cs-principles { padding: 56px 20px; }
+            .cs-sec-title { font-size: 26px; }
+            .cs-principle p { font-size: 16px; }
             .cs-project-nav { padding: 32px 20px; }
             .cs-pnav-name { font-size: 15px; }
         }
@@ -139,6 +184,24 @@
     <main class="cs-case">
         <img src="blinkage-case.jpg" alt="Blinkage case study" loading="eager">
     </main>
+
+    <section class="cs-principles">
+        <div class="cs-principles-inner">
+            <p class="cs-sec-label">The Thinking</p>
+            <h2 class="cs-sec-title">Making invisible infrastructure feel obvious</h2>
+            <p class="cs-sec-intro">An SMS engagement API is abstract, technical plumbing. The real challenge wasn't decoration &mdash; it was legibility and trust: making a brand like Amazon, Netflix or Starbucks understand what this does, and believe it works, within seconds of landing.</p>
+
+            <div class="cs-principle">
+                <span class="cs-law">Hick's Law</span>
+                <p>Decision time grows with the number of choices. Blinkage does a lot &mdash; two-way SMS, drip marketing, automation, number verification, voice fallback, a partner program. Dumped all at once, that range paralyses a buyer. So the page reveals capability progressively instead of all at once, and the use cases are chunked into a small tabbed set &mdash; reminders, notifications, feedback, re-engagement &mdash; so a visitor evaluates one category at a time. The product never got smaller; the decision did.</p>
+            </div>
+
+            <div class="cs-principle">
+                <span class="cs-law">Jakob's Law</span>
+                <p>Users expect your site to work like every other site they know. An enterprise buyer arrives with expectations set by hundreds of SaaS landing pages, so the skeleton is deliberately conventional: a value-proposition hero with one clear CTA, a trust row, scannable feature sections, a plain &ldquo;Let's Talk&rdquo; form. The playful brand &mdash; the &ldquo;blink blink&rdquo; voice, yellow and coral against deep blue &mdash; sits on top of that familiar structure, adding personality without ever challenging the mental model. Novelty in the tone; convention in the bones.</p>
+            </div>
+        </div>
+    </section>
 
     <div class="cs-live">
         <div class="cs-live-inner">
