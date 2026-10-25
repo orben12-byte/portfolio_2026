@@ -40,53 +40,69 @@
         .nav-proto-btn:hover { color: var(--yellow); }
         .nav-proto-btn:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
 
-        /* 1180 = 1100 of image + the same 40px gutter the text section has,
-           so both keep one left edge at every width above mobile */
-        .cs-case { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
-        .cs-case img { display: block; width: 100%; }
+        .np-intro { max-width: 1100px; margin: 0 auto; padding: 120px 24px 48px; }
+        .np-cat {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+            color: var(--yellow); margin-bottom: 14px;
+        }
+        .np-title {
+            font-size: clamp(34px, 6vw, 64px); font-weight: 900;
+            letter-spacing: -2px; line-height: 1; margin-bottom: 20px;
+        }
+        .np-lede { font-size: 17px; line-height: 1.65; opacity: 0.78; max-width: 640px; }
+        .np-facts {
+            display: flex; flex-wrap: wrap; gap: 28px 44px;
+            margin-top: 34px; padding-top: 26px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .np-fact-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+            opacity: 0.45; margin-bottom: 6px;
+        }
+        .np-fact-value { font-size: 15px; font-weight: 600; }
 
-        .cs-principles {
-            padding: 80px 40px;
-            border-top: 1px solid rgba(255,255,255,0.06);
-        }
-        /* same 1100px box as .cs-case, so the text starts on the image's left edge */
-        .cs-principles-inner { max-width: 1100px; margin: 0 auto; }
-        .cs-sec-label {
+        .np-body { max-width: 1100px; margin: 0 auto; padding: 0 24px 40px; }
+        .np-block { margin-bottom: 88px; }
+        .np-head { max-width: 640px; margin-bottom: 22px; }
+        .np-num {
             font-family: 'Space Mono', monospace;
-            font-size: 11px; font-weight: 700; letter-spacing: 3px;
-            text-transform: uppercase; color: var(--yellow);
-            margin-bottom: 18px;
+            font-size: 11px; letter-spacing: 1px;
+            color: var(--yellow); opacity: 0.85; margin-bottom: 10px;
         }
-        .cs-sec-title {
-            font-size: 34px; font-weight: 800; line-height: 1.15;
-            letter-spacing: -0.5px; margin-bottom: 14px;
+        .np-h {
+            font-size: clamp(21px, 2.6vw, 27px); font-weight: 900;
+            letter-spacing: -0.5px; margin-bottom: 10px;
         }
-        .cs-sec-intro {
-            font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.62);
-            margin-bottom: 56px; max-width: 640px;
+        .np-p { font-size: 15.5px; line-height: 1.65; opacity: 0.7; }
+        .np-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .np-grid figure { margin: 0; }
+        .np-shot {
+            width: 100%; display: block; border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.09);
+            aspect-ratio: 428 / 926; object-fit: cover;
         }
-        .cs-principle {
-            padding: 28px 0;
-            border-top: 1px solid rgba(255,255,255,0.09);
-        }
-        .cs-principle:last-child { border-bottom: 1px solid rgba(255,255,255,0.09); }
-        .cs-law {
-            display: inline-block;
+        /* component sheets are near-square and all different: fit, never crop */
+        .np-sys .np-shot { aspect-ratio: 1; object-fit: contain; background: #0d0d0d; }
+        .np-label {
             font-family: 'Space Mono', monospace;
-            font-size: 12px; font-weight: 700; letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--black); background: var(--yellow);
-            padding: 5px 11px; border-radius: 6px;
-            margin-bottom: 16px;
+            font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+            opacity: 0.5; margin-top: 10px;
         }
-        .cs-principle p {
-            font-size: 18px; line-height: 1.62; color: rgba(255,255,255,0.9);
-            max-width: 720px;
+        .np-note {
+            max-width: 640px; margin: 0 0 88px;
+            padding-left: 18px;
+            border-left: 2px solid var(--yellow);
         }
-        @media (max-width: 600px) {
-            .cs-principles { padding: 56px 20px; }
-            .cs-sec-title { font-size: 26px; }
-            .cs-principle p { font-size: 16px; }
+        .np-note .np-num { margin-bottom: 8px; }
+        @media (max-width: 760px) {
+            .np-intro { padding: 96px 20px 36px; }
+            .np-facts { gap: 20px 30px; }
+            .np-block { margin-bottom: 60px; }
+            .np-grid { grid-template-columns: 1fr; gap: 18px; max-width: 340px; }
+            .np-body { padding: 0 20px 30px; }
+            .np-note { margin-bottom: 60px; }
         }
 
         .cs-proto {
@@ -157,7 +173,6 @@
 
         @media (max-width: 600px) {
             .cs-nav { padding: 14px 20px; }
-            .cs-case { padding: 0; }
             .nav-proto-btn { display: none; }
             .cs-proto { padding: 40px 20px; }
             .cs-project-nav { padding: 32px 20px; }
@@ -185,27 +200,160 @@
         <a class="nav-proto-btn" href="#prototype">Prototype ↓</a>
     </nav>
 
-    <main class="cs-case">
-        <img src="lifehero-case.jpg" alt="Life Hero case study" loading="eager">
-    </main>
-
-    <section class="cs-principles">
-        <div class="cs-principles-inner">
-            <p class="cs-sec-label">The Thinking</p>
-            <h2 class="cs-sec-title">Designed around how habits actually form</h2>
-            <p class="cs-sec-intro">Most habit apps ask you to check off a task. Life Hero asks you to <em>become someone</em> — a comic-book hero who grows stronger every time you show up. That shift, from tracking a behaviour to levelling up a hero, is the strategic spine of the product. Every system below serves it.</p>
-
-            <div class="cs-principle">
-                <span class="cs-law">Zeigarnik Effect</span>
-                <p>We remember what's unfinished. So I didn't rely on one progress bar — I layered open loops. Your hero sits mid-rank, part-way to the next level. Each habit is itself a levelling creature with its own bar. The weekly boss runs on a 24-hour countdown. Costumes and achievements wait half-collected. Every loop autosaves and shows a clear path to completion, so incompleteness reads as momentum — not guilt.</p>
-            </div>
-
-            <div class="cs-principle">
-                <span class="cs-law">Peak-End Rule</span>
-                <p>An experience is judged by its most intense moment and its last — not the average. The recurring peak is the weekly boss battle: a timed fight with HP bars where each completed challenge visibly lands a hit. And the arc is deliberate from minute one — onboarding lets you lose a fight, drops you to a blunt "YOU DIED" screen, then a Sidekick reaches down and pulls you back up. Defeat, then a hand reaching down: that's the moment a user remembers, and it's engineered.</p>
-            </div>
+    <section class="np-intro">
+        <p class="np-cat">Product Design &middot; Graduation Project &middot; Mobile App</p>
+        <h1 class="np-title">Life Hero</h1>
+        <p class="np-lede">Most habit apps ask you to tick a box. Life Hero asks you to <em>become someone</em>:
+            a comic-book hero who ranks up every time you show up, loses fights, collects costumes,
+            and has a boss waiting at the end of the week.</p>
+        <div class="np-facts">
+            <div><p class="np-fact-label">Role</p><p class="np-fact-value">UX &amp; UI, end to end</p></div>
+            <div><p class="np-fact-label">Type</p><p class="np-fact-value">Graduation project</p></div>
+            <div><p class="np-fact-label">Year</p><p class="np-fact-value">2023</p></div>
+            <div><p class="np-fact-label">Platform</p><p class="np-fact-value">Mobile</p></div>
         </div>
     </section>
+
+    <main class="np-body">
+        <section class="np-block">
+            <div class="np-head">
+                <p class="np-num">01 &middot; Zeigarnik Effect</p>
+                <h2 class="np-h">Locked, half-collected, two ranks below</h2>
+                <p class="np-p">Achievements that have not opened yet. Nine costumes with most of them still grey. A league that puts two heroes above you. Three different ways to be almost there.</p>
+            </div>
+            <div class="np-grid">
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/01-achievements.png" alt="A grid of achievement tiles, most of them still locked" loading="lazy">
+                    <figcaption class="np-label">Locked achievements</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/02-league.png" alt="The heroes league ladder showing ranks one to three" loading="lazy">
+                    <figcaption class="np-label">The league ladder</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/03-costumes.png" alt="The sidekick screen with a row of costumes to collect" loading="lazy">
+                    <figcaption class="np-label">Nine costumes</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="np-block">
+            <div class="np-head">
+                <p class="np-num">02 &middot; Peak-End Rule</p>
+                <h2 class="np-h">The week has a boss</h2>
+                <p class="np-p">Bad Apple, level 2, on a 24-hour timer. Every challenge you finish lands a hit you can watch. The week ends on a won fight and thirty experience points.</p>
+            </div>
+            <div class="np-grid">
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/04-fight-pow.png" alt="The boss fight with both HP bars full and a POW hit landing" loading="lazy">
+                    <figcaption class="np-label">The hit lands</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/05-fight-bam.png" alt="The boss fight mid-way, the boss HP bar draining" loading="lazy">
+                    <figcaption class="np-label">HP drains</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/06-fight-won.png" alt="A won fight screen reading GREAT JOB YOU WON and 30 EXP" loading="lazy">
+                    <figcaption class="np-label">30 EXP</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="np-block">
+            <div class="np-head">
+                <p class="np-num">03 &middot; Creating a habit</p>
+                <h2 class="np-h">Three questions, asked by the hero</h2>
+                <p class="np-p">A name, a difficulty, a summary. The same three fields a form would have, asked one at a time by a character who waits for the answer.</p>
+            </div>
+            <div class="np-grid">
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/07-mission-name.png" alt="The hero asking for an epic name for an epic mission" loading="lazy">
+                    <figcaption class="np-label">Name it</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/08-mission-level.png" alt="A list of difficulty choices from beginner to hard" loading="lazy">
+                    <figcaption class="np-label">Pick a level</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/09-mission-summary.png" alt="A summary screen listing mission type, title and difficulty" loading="lazy">
+                    <figcaption class="np-label">Confirm</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="np-block">
+            <div class="np-head">
+                <p class="np-num">04 &middot; The first run</p>
+                <h2 class="np-h">You lose the first fight on purpose</h2>
+                <p class="np-p">The devil is your boss at work. You attack, you miss, you die, and the screen says so in red. The sidekick arrives after that, and only then does setup start.</p>
+            </div>
+            <div class="np-grid">
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/10-devil.png" alt="A boss fight against a devil character with HP bars" loading="lazy">
+                    <figcaption class="np-label">The devil</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/11-you-died.png" alt="A black screen reading YOU DIED" loading="lazy">
+                    <figcaption class="np-label">You died</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/12-sidekick.png" alt="Speech bubbles from a sidekick checking whether you can hear them" loading="lazy">
+                    <figcaption class="np-label">The sidekick</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="np-block">
+            <div class="np-head">
+                <p class="np-num">05 &middot; When it breaks</p>
+                <h2 class="np-h">Your Page Is in Another Castle</h2>
+                <p class="np-p">The 404 is a joke the audience will get. The delete says what you lose before you lose it. The sign-in marks which field was wrong instead of failing silently.</p>
+            </div>
+            <div class="np-grid">
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/13-error-404.png" alt="A 404 page reading Your Page Is in Another Castle" loading="lazy">
+                    <figcaption class="np-label">404</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/14-delete.png" alt="A confirmation warning that deleting a mission loses all progress" loading="lazy">
+                    <figcaption class="np-label">Destructive action</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/15-login-error.png" alt="A login screen marking both fields wrong with a retry message" loading="lazy">
+                    <figcaption class="np-label">Wrong credentials</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="np-block np-sys">
+            <div class="np-head">
+                <p class="np-num">06 &middot; The system</p>
+                <h2 class="np-h">One tab bar, every state it has</h2>
+                <p class="np-p">The plus opens into three actions, so the bar is drawn in all of them. The mission card has its own sheet, the milestone tiles theirs, locked and unlocked.</p>
+            </div>
+            <div class="np-grid">
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/16-tabbar.png" alt="The bottom tab bar component sheet in every state" loading="lazy">
+                    <figcaption class="np-label">Tab bar</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/17-mission-card.png" alt="The mission card component sheet across many variants" loading="lazy">
+                    <figcaption class="np-label">Mission card</figcaption>
+                </figure>
+                <figure>
+                    <img class="np-shot" src="slides-lifehero/18-milestones.png" alt="The milestone tiles shown locked and unlocked in four colours" loading="lazy">
+                    <figcaption class="np-label">Milestones</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="np-note">
+            <p class="np-num">Scope</p>
+            <h2 class="np-h">What this never became</h2>
+            <p class="np-p">A graduation project: designed in full, never built. The psychology here is reasoning
+                about how habits form, not a result measured on anyone.</p>
+        </section>
+    </main>
 
     <section id="prototype" class="cs-proto">
         <div class="cs-proto-inner">
